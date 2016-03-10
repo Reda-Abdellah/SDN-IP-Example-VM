@@ -1,0 +1,3 @@
+[submodule "provisioning/onos-ansible"]
+	path = provisioning/onos-ansible
+	url = git@github.com:TakeshiTseng/onos-ansible.git
