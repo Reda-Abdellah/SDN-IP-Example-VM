@@ -1,0 +1,4 @@
+[onos-master]
+onos ansible_ssh_host=10.0.0.10 ansible_port=22
+
+[onos-slave]

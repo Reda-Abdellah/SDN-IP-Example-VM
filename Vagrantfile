@@ -22,4 +22,12 @@ Vagrant.configure(2) do |config|
     vbx.cpus = 1
   end
 
+  # Install basic tools
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "provisioning/basic/playbook.yml"
+    ansible.inventory_path = "provisioning/hosts"
+    ansible.sudo = "true"
+    ansible.limit = "all"
+  end
+
 end
