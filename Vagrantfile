@@ -30,4 +30,12 @@ Vagrant.configure(2) do |config|
     ansible.limit = "all"
   end
 
+  # Install ONOS
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "provisioning/onos-ansible/playbook.yml"
+    ansible.inventory_path = "provisioning/hosts"
+    ansible.sudo = "true"
+    ansible.limit = "all"
+  end
+
 end
