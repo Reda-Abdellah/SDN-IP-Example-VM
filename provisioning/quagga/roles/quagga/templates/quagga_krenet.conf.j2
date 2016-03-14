@@ -1,0 +1,21 @@
+!
+hostname bgp
+password sdnip
+!
+!
+router bgp {{ KRENET_AS_NUM }}
+  bgp router-id 10.10.10.1
+  timers bgp 3 9
+  ! amlight
+  neighbor {{ AMLIGHT_RID }} remote-as {{ AMLIGHT_AS_NUM }}
+  neighbor {{ AMLIGHT_RID }} ebgp-multihop
+  neighbor {{ AMLIGHT_RID }} timers connect 5
+  neighbor {{ AMLIGHT_RID }} advertisement-interval 5
+
+  ! ONOS
+  neighbor {{ SDN_IP_RID }} remote-as {{ SDN_IP_AS_NUM }}
+  neighbor {{ SDN_IP_RID }} port 2000
+  neighbor {{ SDN_IP_RID }} timers connect 5
+  neighbor {{ SDN_IP_RID }} advertisement-interval 5
+!
+log stdout

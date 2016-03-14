@@ -46,4 +46,13 @@ Vagrant.configure(2) do |config|
     ansible.limit = "all"
   end
 
+  # Install quagga
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "provisioning/quagga/playbook.yml"
+    ansible.inventory_path = "provisioning/hosts"
+    ansible.sudo = "true"
+    ansible.limit = "all"
+  end
+
+  # copy sdn-ip template files
 end
