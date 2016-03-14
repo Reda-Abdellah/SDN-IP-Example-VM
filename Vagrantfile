@@ -38,8 +38,9 @@ Vagrant.configure(2) do |config|
   #   ansible.limit = "all"
   # end
 
+  # Install mininet
   config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "provisioning/onos-ansible/playbook.yml"
+    ansible.playbook = "provisioning/mininet/playbook.yml"
     ansible.inventory_path = "provisioning/hosts"
     ansible.sudo = "true"
     ansible.limit = "all"

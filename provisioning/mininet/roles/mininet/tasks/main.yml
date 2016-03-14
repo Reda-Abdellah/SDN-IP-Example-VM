@@ -1,0 +1,19 @@
+---
+- name: Clone mininet
+  git:
+    repo: https://github.com/mininet/mininet.git
+    dest: /root/mininet
+    update: no
+  tags: mininet
+
+- name: correct dpkg interrupted problem
+  shell: dpkg --configure -a
+  args:
+    chdir: /root/mininet
+  tags: mininet
+
+- name: install mininet
+  shell: ./util/install.sh -e -f -k -m -n -t -v -w -0 -3
+  args:
+    chdir: /root/mininet
+  tags: mininet
