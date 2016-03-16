@@ -1,0 +1,16 @@
+! BGP configuration for quagga 1
+!
+hostname quagga1
+password quagga1
+!
+router bgp 65113
+  bgp router-id 134.75.108.62
+  timers bgp 3 9
+
+  ! krenet
+  neighbor 134.75.108.61 remote-as 65111
+  neighbor 134.75.108.61 ebgp-multihop
+  neighbor 134.75.108.61 timers connect 5
+  neighbor 134.75.108.61 advertisement-interval 5
+!
+log stdout

@@ -1,0 +1,16 @@
+! BGP configuration for krenet
+!
+hostname krenet
+password krenet
+!
+!
+router bgp 65111
+  bgp router-id 134.75.108.61
+  timers bgp 3 9
+
+  ! ONOS
+  neighbor 134.75.108.62 remote-as 65113
+  neighbor 134.75.108.62 timers connect 5
+  neighbor 134.75.108.62 advertisement-interval 5
+!
+log stdout

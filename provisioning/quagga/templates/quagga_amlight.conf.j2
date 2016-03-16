@@ -1,0 +1,16 @@
+! BGP configuration for amlight
+!
+hostname amlight
+password amlight
+!
+!
+router bgp 20080
+  bgp router-id 190.103.186.150
+  timers bgp 3 9
+
+  ! ONOS
+  neighbor 190.103.186.151 remote-as 65113
+  neighbor 190.103.186.151 timers connect 5
+  neighbor 190.103.186.151 advertisement-interval 5
+!
+log stdout
