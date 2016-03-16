@@ -1,8 +1,23 @@
-SDN IP tutorial VM
+SDN-IP tutorial VM
 ----
 
-Include:
+This Repo Include:
 
-- Vargent for ONOS VM
-- Vargent for mininet VM
+- Vargent VM
+- Ansible files for:
+  - basic environment settings.
+  - mininet, include SDN-IP sample topology script.
+  - ONOS, include Karaf, Maven, Java 8.
+  - quagga, include sample configuration files.
 
+How to install:
+
+- Clone submodules
+```bash
+$ git submodules update --init
+```
+
+- Start VM
+```bash
+$ vagrant up
+```
