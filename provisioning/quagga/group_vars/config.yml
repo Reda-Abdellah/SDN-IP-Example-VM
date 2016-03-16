@@ -1,22 +1,6 @@
 ---
 # paths
-DOWNLOADS_PATH: "~/Downloads"
-QUAGGA_CONFIG_PATH: "~/quagga/configs"
-ZEBRA_CONFIG_PATH: "~/zebra/configs"
-
-Q1_HOSTNAME: "quagga1"
-Q2_HOSTNAME: "quagga2"
-Q1_PWD: "quagga1"
-Q2_PWD: "quagga2"
-AMLIGHT_HOSTNAME: "amlight"
-AMLIGHT_PWD: "amlight"
-KRENET_HOSTNAME: "krenet"
-KRENET_PWD: "krenet"
-Z_HOSTNAME: "zebra"
-Z_PWD: "zebra"
-SDN_IP_AS_NUM: 65000
-AMLIGHT_AS_NUM: 65001
-KRENET_AS_NUM: 65002
-SDN_IP_RID: "10.0.1.1"
-AMLIGHT_RID: "10.0.2.1"
-KRENET_RID: "10.0.3.1"
+APP_PATH: "/root/Applications"
+DOWNLOADS_PATH: "/root/Downloads"
+QUAGGA_CONFIG_PATH: "/root/quagga/configs"
+ZEBRA_CONFIG_PATH: "/root/zebra/configs"
