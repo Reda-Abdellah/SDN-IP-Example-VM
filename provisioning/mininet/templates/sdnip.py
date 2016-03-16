@@ -9,7 +9,8 @@ from mininet.node import Host, RemoteController
 QUAGGA_DIR = '/usr/lib/quagga'
 # Must exist and be owned by quagga user (quagga:quagga by default on Ubuntu)
 QUAGGA_RUN_DIR = '/var/run/quagga'
-CONFIG_DIR = 'configs'
+QCONFIG_DIR = '/root/quagga/configs'
+ZCONFIG_DIR = '/root/zebra/configs'
 
 
 class SdnIpHost(Host):
@@ -61,85 +62,124 @@ class Router(Host):
 
 
 class SdnIpTopo(Topo):
-    "SDN-IP tutorial topology"
+    """
+    NCTU SDN-IP tutorial topology
+                                    +------+
+                                    |      |
+                                    |Quagga|
+                                    |  02  |
+                                    +-eth0-+
+                                       |
+          +------+                  +------+
+          |      |                  |      |
+      +---+  S1  +------------------+  S4  |
+      |   |      |                  |      |
+      |   +--+---+                  +---+--+
+      |      |                          |
+      +      |                          |
+    Krenet   |                          |
+             |                          |
+             |                          |     Amlight
+          +--+---+                  +---+--+     +
+          |      |                  |      |     |
+          |  S2  +------------------+  S3  +-----+
+          |      |                  |      |
+          +--+---+                  +------+
+             |
+          +-eth0-+
+          |      |
+          |Quagga|
+          |  01  |
+          +------+
+    """
 
     def build(self):
-        s1 = self.addSwitch('s1', dpid='00000000000000a1')
-        s2 = self.addSwitch('s2', dpid='00000000000000a2')
-        s3 = self.addSwitch('s3', dpid='00000000000000a3')
-        s4 = self.addSwitch('s4', dpid='00000000000000a4')
+        zebraConf = '{}/zebra.conf'.format(ZCONFIG_DIR)
 
-        zebraConf = '%s/zebra.conf' % CONFIG_DIR
+        s1 = self.addSwitch('s1', dpid='5a90cc37aba923ab')
+        s2 = self.addSwitch('s2', dpid='bfb1cc37aba9243f')
+        s3 = self.addSwitch('s3', dpid='f7a6cc37aba92283')
+        s4 = self.addSwitch('s4', dpid='c791cc37aba92361')
+        self.addLink(s1, s2)
+        self.addLink(s1, s4)
+        self.addLink(s3, s2)
+        self.addLink(s3, s4)
 
-        # Switches we want to attach our routers to, in the correct order
-        attachmentSwitches = [s1, s2, s5, s6]
-
-        for i in range(1, 4 + 1):
-            name = 'r%s' % i
-
-            eth0 = {
-                'mac': '00:00:00:00:0%s:01' % i,
-                'ipAddrs': ['10.0.%s.1/24' % i]
-            }
-            eth1 = {
-                'ipAddrs': ['192.168.%s.254/24' % i]
-            }
-
-            intfs = {
-                '{}-eth0'.format(name): eth0,
-                '{}-eth1'.format(name): eth1
-            }
-
-            quaggaConf = '%s/quagga%s.conf' % (CONFIG_DIR, i)
-
-            router = self.addHost(name, cls=Router, quaggaConfFile=quaggaConf,
-                                  zebraConfFile=zebraConf, intfDict=intfs)
-
-            host = self.addHost('h%s' % i, cls=SdnIpHost,
-                                ip='192.168.%s.1/24' % i,
-                                route='192.168.%s.254' % i)
-
-            self.addLink(router, attachmentSwitches[i - 1])
-            self.addLink(router, host)
-
-        # Set up the internal BGP speaker
-        bgpEth0 = {
-            'mac': '00:00:00:00:00:01',
+        # Internal quagga 1
+        bgpq1Eth0 = {
+            'mac': '00:50:56:B7:94:F5',
             'ipAddrs': [
-                '10.0.1.101/24',
-                '10.0.2.101/24',
-                '10.0.3.101/24',
-                '10.0.4.101/24',
+                '134.75.108.62/30'
             ]
         }
 
-        bgpEth1 = {
-            'ipAddrs': ['10.10.10.1/24']
-        }
         bgpIntfs = {
-            'bgp-eth0': bgpEth0,
-            'bgp-eth1': bgpEth1
+            'bgpq1-eth0': bgpq1Eth0
         }
 
-        bgp = self.addHost("bgp", cls=Router,
-                           quaggaConfFile='%s/quagga-sdn.conf' % CONFIG_DIR,
-                           zebraConfFile=zebraConf,
-                           intfDict=bgpIntfs)
+        bgpq1 = self.addHost("bgpq1", cls=Router,
+                             quaggaConfFile='%s/quagga_internal_1.conf' % CONFIG_DIR,
+                             zebraConfFile=zebraConf,
+                             intfDict=bgpIntfs)
 
-        self.addLink(bgp, s3)
+        self.addLink(bgpq1, s2)
 
-        # Connect BGP speaker to the root namespace so it can peer with ONOS
-        root = self.addHost('root', inNamespace=False, ip='10.10.10.2/24')
-        self.addLink(root, bgp)
+        # Internal quagga 2
+        bgpq2Eth0 = {
+            'mac': '00:50:56:B7:1E:6F',
+            'ipAddrs': [
+                '190.103.186.151/31'
+            ]
+        }
 
-        #  Wire up the switches in the topology
-        self.addLink(s1, s2)
-        self.addLink(s1, s3)
-        self.addLink(s2, s4)
-        self.addLink(s3, s4)
-        self.addLink(s3, s5)
-        self.addLink(s4, s6)
-        self.addLink(s5, s6)
+        bgpIntfs = {
+            'bgpq2-eth0': bgpq2Eth0
+        }
+
+        bgpq2 = self.addHost("bgpq2", cls=Router,
+                             quaggaConfFile='%s/quagga_internal_2.conf' % CONFIG_DIR,
+                             zebraConfFile=zebraConf,
+                             intfDict=bgpIntfs)
+
+        self.addLink(bgpq2, s4)
+
+        # KRENET Quagga
+        bgpKreEth0 = {
+            'mac': 'C0:FF:EE:C0:FF:EE',
+            'ipAddrs': [
+                '134.75.108.61/30'
+            ]
+        }
+
+        bgpIntfs = {
+            'bgpkre-eth0': bgpKreEth0
+        }
+
+        bgpkre = self.addHost("bgpkre", cls=Router,
+                              quaggaConfFile='%s/quagga_krenet.conf' % CONFIG_DIR,
+                              zebraConfFile=zebraConf,
+                              intfDict=bgpIntfs)
+
+        self.addLink(bgpkre, s1)
+
+        # AmLight Quagga
+        bgpalEth0 = {
+            'mac': '00:50:56:B7:1E:6F',
+            'ipAddrs': [
+                '190.103.186.151/31'
+            ]
+        }
+
+        bgpIntfs = {
+            'bgpal-eth0': bgpalEth0
+        }
+
+        bgpal = self.addHost("bgpal", cls=Router,
+                             quaggaConfFile='%s/quagga_amlight.conf' % CONFIG_DIR,
+                             zebraConfFile=zebraConf,
+                             intfDict=bgpIntfs)
+
+        self.addLink(bgpal, s3)
 
 topos = {'sdnip': SdnIpTopo}
 
