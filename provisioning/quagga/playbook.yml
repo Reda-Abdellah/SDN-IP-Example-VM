@@ -6,4 +6,5 @@
     - group_vars/version.yml
 
   roles:
+    - apt
     - quagga

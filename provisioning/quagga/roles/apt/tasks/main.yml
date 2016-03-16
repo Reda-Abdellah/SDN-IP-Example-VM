@@ -1,0 +1,9 @@
+---
+- name: Install gawk and libreadline
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - gawk
+    - libreadline-dev
+  tags: apt
