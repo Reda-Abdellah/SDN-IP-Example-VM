@@ -13,7 +13,7 @@
   tags: mininet
 
 - name: install mininet
-  shell: ./util/install.sh -e -f -k -m -n -t -v -w -0 -3
+  shell: ./util/install.sh -f -k -m -n -t -v -w -0 -3
   args:
     chdir: /root/mininet
   tags: mininet
