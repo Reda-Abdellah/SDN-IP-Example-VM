@@ -6,7 +6,6 @@ Vagrant.configure(2) do |config|
 
   config.vm.box = "ubuntu/trusty64"
   config.vm.hostname = "onos"
-  config.vm.network "private_network", ip: "10.0.0.10", netmask: "255.255.255.0"
   config.vm.network "forwarded_port", guest: 8181, host: 8181
 
   # Set the name of the VM. See: http://stackoverflow.com/a/17864388/100134
