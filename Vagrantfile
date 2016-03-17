@@ -21,38 +21,20 @@ Vagrant.configure(2) do |config|
     vbx.memory = 2048
     vbx.cpus = 4
   end
+  playbooks = [
+#	"basic",
+#	"onos-ansible",
+#	"mininet",
+	"quagga"
+  ]
 
-  # Install basic tools
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "provisioning/basic/playbook.yml"
-    ansible.inventory_path = "provisioning/hosts"
-    ansible.sudo = "true"
-    ansible.limit = "all"
+  playbooks.each do |bookname|
+	config.vm.provision "ansible" do |ansible|
+      ansible.playbook = "provisioning/#{bookname}/playbook.yml"
+      ansible.inventory_path = "provisioning/hosts"
+      ansible.sudo = "true"
+      ansible.limit = "all"
+    end
   end
 
-  # Install ONOS
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "provisioning/onos-ansible/playbook.yml"
-    ansible.inventory_path = "provisioning/hosts"
-    ansible.sudo = "true"
-    ansible.limit = "all"
-  end
-
-  # Install mininet
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "provisioning/mininet/playbook.yml"
-    ansible.inventory_path = "provisioning/hosts"
-    ansible.sudo = "true"
-    ansible.limit = "all"
-  end
-
-  # Install quagga
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "provisioning/quagga/playbook.yml"
-    ansible.inventory_path = "provisioning/hosts"
-    ansible.sudo = "true"
-    ansible.limit = "all"
-  end
-
-  # copy sdn-ip template files
-end
+ end
