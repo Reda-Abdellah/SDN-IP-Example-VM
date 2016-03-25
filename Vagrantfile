@@ -22,10 +22,10 @@ Vagrant.configure(2) do |config|
     vbx.cpus = 4
   end
   playbooks = [
-#	"basic",
-#	"onos-ansible",
-#	"mininet",
-	"quagga"
+    "basic",
+	  "onos-ansible",
+	  "mininet",
+	  "quagga"
   ]
 
   playbooks.each do |bookname|
