@@ -14,6 +14,7 @@ Vagrant.configure(2) do |config|
 
   config.ssh.username = 'vagrant'
   config.ssh.password = 'vagrant'
+  config.ssh.insert_key = true
 
   # Use Virtual Box as provider
   config.vm.provider "virtualbox" do |vbx|
