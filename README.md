@@ -21,3 +21,15 @@ $ git submodule update --init
 ```bash
 $ vagrant up
 ```
+
+To use:
+
+- Connect to vm via ssh
+```bash
+$ vagrant ssh
+```
+
+- Switch user to root
+```bash
+$ sudo su
+```
