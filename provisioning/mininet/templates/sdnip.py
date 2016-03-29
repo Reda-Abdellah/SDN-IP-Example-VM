@@ -174,12 +174,15 @@ if __name__ == '__main__':
     setLogLevel('debug')
     topo = SdnIpTopo()
 
-    net = Mininet(topo=topo, controller=RemoteController)
+    net = Mininet(topo=topo, controller=None)
 
     net.start()
+    c0 = net.addController(name='c0', controller=RemoteController, ip='127.0.0.1', port=6633)
+
+    for i in range(1, 5):
+        net.get('s%d' % i).start([c0])
 
     CLI(net)
-
     net.stop()
 
     info("done\n")
