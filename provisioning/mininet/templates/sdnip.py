@@ -182,6 +182,7 @@ if __name__ == '__main__':
     for i in range(1, 5):
         net.get('s%d' % i).start([c0])
 
+    net.get('tor').cmd('ip addr add 192.168.113.10/24 dev tor')
     CLI(net)
     net.stop()
 
