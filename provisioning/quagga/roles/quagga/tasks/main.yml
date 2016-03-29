@@ -1,34 +1,10 @@
 ---
-- name: Download Quagga
-  get_url:
-    dest: "{{ DOWNLOADS_PATH }}/quagga-{{ QUAGGA_VER }}.tar.gz"
-    url: "http://download.savannah.gnu.org/releases/quagga/quagga-{{ QUAGGA_VER }}.tar.gz"
+- name: Install Quagga via apt-get
+  apt:
+    name: quagga={{ QUAGGA_VER }}
+    state: present
   tags: quagga
 
-- name: Unarchive Quagga
-  unarchive:
-    copy: no
-    dest: "{{ APP_PATH }}"
-    src: "{{ DOWNLOADS_PATH }}/quagga-{{ QUAGGA_VER }}.tar.gz"
-  tags: quagga
-
-- name: Configure Quagga
-  shell: ./configure
-  args:
-    chdir: "{{ APP_PATH }}/quagga-{{ QUAGGA_VER }}"
-  tags: quagga
-
-- name: Build Quagga
-  shell: make
-  args:
-    chdir: "{{ APP_PATH }}/quagga-{{ QUAGGA_VER }}"
-  tags: quagga
-
-- name: Install Quagga
-  shell: make install
-  args:
-    chdir: "{{ APP_PATH }}/quagga-{{ QUAGGA_VER }}"
-  tags: quagga
 - name: Make quagga configuration dir
   file:
     path="{{ QUAGGA_CONFIG_PATH }}"
@@ -55,5 +31,11 @@
   template:
     src: "templates/zebra.conf.j2"
     dest: "{{ ZEBRA_CONFIG_PATH }}/zebra.conf"
-    mode: 644
+    mode: 0644
+  tags: quagga
+
+- name: Make /root readable for vty
+  file:
+    path: /root
+    mode: 0755
   tags: quagga
