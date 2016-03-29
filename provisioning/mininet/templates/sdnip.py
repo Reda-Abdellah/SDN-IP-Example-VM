@@ -49,8 +49,10 @@ class Router(Host):
                 self.cmd('ip link set %s up ' % intf)
 
             # setup address to interfaces
+            label_num = 0
             for addr in attrs['ipAddrs']:
-                self.cmd('ip addr add %s dev %s' % (addr, intf))
+                self.cmd("ip addr add %s brd + dev %s label %s:%d" % (addr, intf, intf, label_num))
+                label_num += 1
 
         self.cmd('/usr/lib/quagga/zebra -d -f %s -z %s/zebra%s.api -i %s/zebra%s.pid' % (self.zebraConfFile, QUAGGA_RUN_DIR, self.name, QUAGGA_RUN_DIR, self.name))
         self.cmd('/usr/lib/quagga/bgpd -d -f %s -z %s/zebra%s.api -i %s/bgpd%s.pid' % (self.quaggaConfFile, QUAGGA_RUN_DIR, self.name, QUAGGA_RUN_DIR, self.name))
