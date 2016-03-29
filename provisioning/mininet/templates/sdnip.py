@@ -4,7 +4,7 @@ from mininet.topo import Topo
 from mininet.net import Mininet
 from mininet.cli import CLI
 from mininet.log import setLogLevel, info, debug
-from mininet.node import Host, RemoteController
+from mininet.node import Host, RemoteController, OVSSwitch
 
 QUAGGA_DIR = '/usr/lib/quagga'
 # Must exist and be owned by quagga user (quagga:quagga by default on Ubuntu)
@@ -64,11 +64,13 @@ class Router(Host):
 class SdnIpTopo(Topo):
     """
     NCTU SDN-IP tutorial topology
-                                    +------+
+                                   Host (onos)
+                                       |
+                                    +-eth0-+
                                     |      |
                                     |Quagga|
                                     |  02  |
-                                    +-eth0-+
+                                    +-eth1-+
                                        |
           +------+                  +------+
           |      |                  |      |
@@ -86,16 +88,18 @@ class SdnIpTopo(Topo):
           |      |                  |      |
           +--+---+                  +------+
              |
-          +-eth0-+
+          +-eth1-+
           |      |
           |Quagga|
           |  01  |
-          +------+
+          +-eth0-+
+             |
+         Host (onos)
     """
 
     def build(self):
         zebraConf = '{}/zebra.conf'.format(ZCONFIG_DIR)
-
+        tor = self.addSwitch('tor', cls=OVSSwitch, failMode='standalone', dpid='0000000000000001')
         s1 = self.addSwitch('s1', dpid='5a90cc37aba923ab')
         s2 = self.addSwitch('s2', dpid='bfb1cc37aba9243f')
         s3 = self.addSwitch('s3', dpid='f7a6cc37aba92283')
