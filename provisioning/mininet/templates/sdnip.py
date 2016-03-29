@@ -110,80 +110,63 @@ class SdnIpTopo(Topo):
         self.addLink(s3, s4)
 
         # Internal quagga 1
-        bgpq1Eth0 = {
-            'mac': '00:50:56:B7:94:F5',
-            'ipAddrs': [
-                '134.75.108.62/30'
-            ]
-        }
-
-        bgpIntfs = {
-            'bgpq1-eth0': bgpq1Eth0
+        bgpq1Intfs = {
+            'bgpq1-eth0': {
+                'mac': '00:50:56:b7:3e:dd',
+                'ipAddrs': [
+                    '192.168.113.20/24'
+                ]
+            },
+            'bgpq1-eth1': {
+                'mac': '00:50:56:B7:94:F5',
+                'ipAddrs': [
+                    '10.113.1.1/30',
+                    '10.113.2.1/30',
+                    '134.75.108.62/31'
+                ]
+            }
         }
 
         bgpq1 = self.addHost("bgpq1", cls=Router,
-                             quaggaConfFile='%s/quagga_internal_1.conf' % CONFIG_DIR,
+                             quaggaConfFile='%s/quagga_internal_1.conf' % QCONFIG_DIR,
                              zebraConfFile=zebraConf,
-                             intfDict=bgpIntfs)
+                             intfDict=bgpq1Intfs)
+        # eth0
+        self.addLink(bgpq1, tor)
 
+        # eth1
         self.addLink(bgpq1, s2)
 
-        # Internal quagga 2
-        bgpq2Eth0 = {
-            'mac': '00:50:56:B7:1E:6F',
-            'ipAddrs': [
-                '190.103.186.151/31'
-            ]
-        }
 
-        bgpIntfs = {
-            'bgpq2-eth0': bgpq2Eth0
+        # Internal quagga 2
+        bgpq2Intfs = {
+            'bgpq2-eth0': {
+                'mac': '00:50:56:b7:04:60',
+                'ipAddrs': [
+                    '192.168.113.22/24'
+                ]
+            },
+            'bgpq2-eth1': {
+                'mac': '00:50:56:b7:1e:6f',
+                'ipAddrs': [
+                    '10.113.1.5/30',
+                    '10.113.2.5/30',
+                    '190.103.186.151/31'
+                ]
+            }
         }
 
         bgpq2 = self.addHost("bgpq2", cls=Router,
-                             quaggaConfFile='%s/quagga_internal_2.conf' % CONFIG_DIR,
+                             quaggaConfFile='%s/quagga_internal_2.conf' % QCONFIG_DIR,
                              zebraConfFile=zebraConf,
-                             intfDict=bgpIntfs)
+                             intfDict=bgpq2Intfs)
 
+        # eth0
+        self.addLink(bgpq2, tor)
+
+        # eth1
         self.addLink(bgpq2, s4)
 
-        # KRENET Quagga
-        bgpKreEth0 = {
-            'mac': 'C0:FF:EE:C0:FF:EE',
-            'ipAddrs': [
-                '134.75.108.61/30'
-            ]
-        }
-
-        bgpIntfs = {
-            'bgpkre-eth0': bgpKreEth0
-        }
-
-        bgpkre = self.addHost("bgpkre", cls=Router,
-                              quaggaConfFile='%s/quagga_krenet.conf' % CONFIG_DIR,
-                              zebraConfFile=zebraConf,
-                              intfDict=bgpIntfs)
-
-        self.addLink(bgpkre, s1)
-
-        # AmLight Quagga
-        bgpalEth0 = {
-            'mac': '00:50:56:B7:1E:6F',
-            'ipAddrs': [
-                '190.103.186.151/31'
-            ]
-        }
-
-        bgpIntfs = {
-            'bgpal-eth0': bgpalEth0
-        }
-
-        bgpal = self.addHost("bgpal", cls=Router,
-                             quaggaConfFile='%s/quagga_amlight.conf' % CONFIG_DIR,
-                             zebraConfFile=zebraConf,
-                             intfDict=bgpIntfs)
-
-        self.addLink(bgpal, s3)
 
 topos = {'sdnip': SdnIpTopo}
 
