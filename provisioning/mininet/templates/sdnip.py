@@ -4,7 +4,7 @@ from mininet.topo import Topo
 from mininet.net import Mininet
 from mininet.cli import CLI
 from mininet.log import setLogLevel, info, debug
-from mininet.node import Host, RemoteController, OVSSwitch
+from mininet.node import Host, RemoteController, OVSKernelSwitch
 
 QUAGGA_DIR = '/usr/lib/quagga'
 # Must exist and be owned by quagga user (quagga:quagga by default on Ubuntu)
@@ -99,11 +99,11 @@ class SdnIpTopo(Topo):
 
     def build(self):
         zebraConf = '{}/zebra.conf'.format(ZCONFIG_DIR)
-        tor = self.addSwitch('tor', cls=OVSSwitch, failMode='standalone', dpid='0000000000000001')
-        s1 = self.addSwitch('s1', dpid='5a90cc37aba923ab')
-        s2 = self.addSwitch('s2', dpid='bfb1cc37aba9243f')
-        s3 = self.addSwitch('s3', dpid='f7a6cc37aba92283')
-        s4 = self.addSwitch('s4', dpid='c791cc37aba92361')
+        tor = self.addSwitch('tor', cls=OVSKernelSwitch, failMode='standalone', dpid='0000000000000001')
+        s1 = self.addSwitch('s1', dpid='5a90cc37aba923ab', cls=OVSKernelSwitch)
+        s2 = self.addSwitch('s2', dpid='bfb1cc37aba9243f', cls=OVSKernelSwitch)
+        s3 = self.addSwitch('s3', dpid='f7a6cc37aba92283', cls=OVSKernelSwitch)
+        s4 = self.addSwitch('s4', dpid='c791cc37aba92361', cls=OVSKernelSwitch)
         self.addLink(s1, s2)
         self.addLink(s1, s4)
         self.addLink(s3, s2)
