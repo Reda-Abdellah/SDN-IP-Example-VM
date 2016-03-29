@@ -14,7 +14,7 @@ How to install:
 
 - Clone submodules
 ```bash
-$ git submodules update --init
+$ git submodule update --init
 ```
 
 - Start VM
