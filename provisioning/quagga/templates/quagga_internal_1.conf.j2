@@ -1,16 +1,42 @@
-! BGP configuration for quagga 1
 !
-hostname quagga1
-password quagga1
+! Zebra configuration saved from vty
+!   2016/03/09 04:25:41
+!
+hostname sdnds-tw-quagga1
+password sdnds-tw-quagga1
+log file /var/log/quagga/bgpd.log
 !
 router bgp 65113
-  bgp router-id 134.75.108.62
-  timers bgp 3 9
-
-  ! krenet
-  neighbor 134.75.108.61 remote-as 65111
-  neighbor 134.75.108.61 ebgp-multihop
-  neighbor 134.75.108.61 timers connect 5
-  neighbor 134.75.108.61 advertisement-interval 5
+ bgp router-id 192.168.113.20
+ timers bgp 3 10
+ neighbor 10.113.1.2 remote-as 65110
+ neighbor 10.113.1.2 soft-reconfiguration inbound
+ neighbor 10.113.1.2 prefix-list NCTU1 in
+ neighbor 10.113.2.2 remote-as 65120
+ neighbor 10.113.2.2 soft-reconfiguration inbound
+ neighbor 10.113.2.2 prefix-list NCTU2 in
+ neighbor 134.75.108.61 remote-as 65111
+ neighbor 134.75.108.61 next-hop-self
+ neighbor 134.75.108.61 soft-reconfiguration inbound
+ neighbor 134.75.108.61 prefix-list KREONET in
+ neighbor 192.168.113.10 remote-as 65113
+ neighbor 192.168.113.10 port 2000
+ neighbor 192.168.113.10 timers connect 5
+ neighbor 192.168.113.11 remote-as 65113
+ neighbor 192.168.113.11 port 2000
+ neighbor 192.168.113.11 timers connect 5
+ neighbor 192.168.113.12 remote-as 65113
+ neighbor 192.168.113.12 port 2000
+ neighbor 192.168.113.12 timers connect 5
+ neighbor 192.168.113.22 remote-as 65113
+ neighbor 192.168.113.22 next-hop-self
+ neighbor 192.168.113.22 soft-reconfiguration inbound
 !
-log stdout
+ip prefix-list KREONET seq 1 permit any
+ip prefix-list NCTU1 seq 1 permit 10.113.10.0/24
+ip prefix-list NCTU1 seq 10 deny any
+ip prefix-list NCTU2 seq 1 permit 10.113.20.0/24
+ip prefix-list NCTU2 seq 10 deny any
+!
+line vty
+!

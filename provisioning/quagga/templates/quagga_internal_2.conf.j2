@@ -1,16 +1,41 @@
-! BGP configuration for quagga 2
 !
-hostname quagga2
-password quagga2
+! Zebra configuration saved from vty
+!   2016/03/09 04:26:53
+!
+hostname sdnds-tw-quagga2
+password sdnds-tw-quagga2
+log file /var/log/quagga/bgpd.log
 !
 router bgp 65113
-  bgp router-id 190.103.186.151
-  timers bgp 3 9
-
-  ! amlight
-  neighbor 190.103.186.150 remote-as 20080
-  neighbor 190.103.186.150 ebgp-multihop
-  neighbor 190.103.186.150 timers connect 5
-  neighbor 190.103.186.150 advertisement-interval 5
+ bgp router-id 192.168.113.22
+ timers bgp 3 10
+ neighbor 10.113.1.6 remote-as 65110
+ neighbor 10.113.1.6 soft-reconfiguration inbound
+ neighbor 10.113.1.6 prefix-list NCTU1 in
+ neighbor 10.113.2.6 remote-as 65120
+ neighbor 10.113.2.6 soft-reconfiguration inbound
+ neighbor 10.113.2.6 prefix-list NCTU2 in
+ neighbor 190.103.186.150 remote-as 20080
+ neighbor 190.103.186.150 next-hop-self
+ neighbor 190.103.186.150 soft-reconfiguration inbound
+ neighbor 190.103.186.150 prefix-list AMLIGHT in
+ neighbor 192.168.113.10 remote-as 65113
+ neighbor 192.168.113.10 port 2000
+ neighbor 192.168.113.10 timers connect 5
+ neighbor 192.168.113.11 remote-as 65113
+ neighbor 192.168.113.11 port 2000
+ neighbor 192.168.113.11 timers connect 5
+ neighbor 192.168.113.12 remote-as 65113
+ neighbor 192.168.113.12 port 2000
+ neighbor 192.168.113.12 timers connect 5
+ neighbor 192.168.113.20 remote-as 65113
+ neighbor 192.168.113.20 soft-reconfiguration inbound
 !
-log stdout
+ip prefix-list AMLIGHT seq 1 permit any
+ip prefix-list NCTU1 seq 1 permit 10.113.10.0/24
+ip prefix-list NCTU1 seq 10 deny any
+ip prefix-list NCTU2 seq 1 permit 10.113.20.0/24
+ip prefix-list NCTU2 seq 10 deny any
+!
+line vty
+!
