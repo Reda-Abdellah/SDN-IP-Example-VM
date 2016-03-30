@@ -208,8 +208,9 @@ class SdnIpTopo(Topo):
             }
         }
 
+
         amlight = self.addHost("amlight", cls=Router,
-                             quaggaConfFile='%s/quagga_ikreonet.conf' % QCONFIG_DIR,
+                             quaggaConfFile='%s/quagga_amlight.conf' % QCONFIG_DIR,
                              zebraConfFile=zebraConf,
                              intfDict=amlightIntfs)
 
