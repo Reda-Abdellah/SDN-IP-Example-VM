@@ -192,6 +192,12 @@ class SdnIpTopo(Topo):
 
         self.addLink(kreonet, s1, port1=1, port2=1)
 
+        # host behind kreonet
+        k_host = self.addHost("khost", cls=SdnIpHost,
+                              ip="100.0.0.10/24",
+                              gw="100.0.0.1")
+        self.addLink(kreonet, k_host, port1=0, port2=0)
+
         # AmLight
         amlightIntfs = {
             'amlight-eth0': {
@@ -216,6 +222,11 @@ class SdnIpTopo(Topo):
 
         self.addLink(amlight, s3, port1=1, port2=1)
 
+        # host behind amlight
+        a_host = self.addHost("ahost", cls=SdnIpHost,
+                              ip="100.0.1.10/24",
+                              gw="100.0.1.1")
+        self.addLink(amlight, a_host, port1=0, port2=0)
 
 
 topos = {'sdnip': SdnIpTopo}
