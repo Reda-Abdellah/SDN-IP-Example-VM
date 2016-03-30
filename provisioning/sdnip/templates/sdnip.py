@@ -106,10 +106,10 @@ class SdnIpTopo(Topo):
         s2 = self.addSwitch('s2', dpid='bfb1cc37aba9243f', cls=OVSKernelSwitch)
         s3 = self.addSwitch('s3', dpid='f7a6cc37aba92283', cls=OVSKernelSwitch)
         s4 = self.addSwitch('s4', dpid='c791cc37aba92361', cls=OVSKernelSwitch)
-        self.addLink(s1, s2)
-        self.addLink(s1, s4)
-        self.addLink(s3, s2)
-        self.addLink(s3, s4)
+        self.addLink(s1, s2, port1=3, port2=3)
+        self.addLink(s1, s4, port1=4, port2=4)
+        self.addLink(s3, s2, port1=4, port2=4)
+        self.addLink(s3, s4, port1=3, port2=3)
 
         # Internal quagga 1
         bgpq1Intfs = {
@@ -134,10 +134,10 @@ class SdnIpTopo(Topo):
                              zebraConfFile=zebraConf,
                              intfDict=bgpq1Intfs)
         # eth0
-        self.addLink(bgpq1, tor)
+        self.addLink(bgpq1, tor, port1=0, port2=0)
 
         # eth1
-        self.addLink(bgpq1, s2)
+        self.addLink(bgpq1, s2, port1=1, port2=1)
 
 
         # Internal quagga 2
@@ -164,10 +164,10 @@ class SdnIpTopo(Topo):
                              intfDict=bgpq2Intfs)
 
         # eth0
-        self.addLink(bgpq2, tor)
+        self.addLink(bgpq2, tor, port1=0, port2=1)
 
         # eth1
-        self.addLink(bgpq2, s4)
+        self.addLink(bgpq2, s4, port1=1, port2=1)
 
 
 topos = {'sdnip': SdnIpTopo}
