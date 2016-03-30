@@ -17,9 +17,3 @@
   args:
     chdir: /root/mininet
   tags: mininet
-
-- name: copy SDN IP topology script
-  template:
-    src: templates/sdnip.py
-    dest: /root/sdnip.py
-    mode: 0755

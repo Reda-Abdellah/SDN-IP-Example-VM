@@ -1,0 +1,98 @@
+{
+    "ports" : {
+        "of:bfb1cc37aba9243f/2" : {
+            "interfaces" : [
+                {
+                    "name" : "nctutest2-quagga1",
+                    "ips" : ["10.113.2.1/30"],
+                    "mac" : "00:50:56:b7:94:f5"
+                },
+                {
+                    "name" : "nctutest2-quagga2",
+                    "ips" : ["10.113.2.5/30"],
+                    "mac" : "00:50:56:b7:1e:6f"
+                }
+            ]
+        },
+        "of:c791cc37aba92361/2" : {
+            "interfaces" : [
+                {
+                    "name" : "nctutest-quagga1",
+                    "ips" : ["10.113.1.1/30"],
+                    "mac" : "00:50:56:b7:94:f5"
+                },
+                {
+                    "name" : "nctutest-quagga2",
+                    "ips" : ["10.113.1.5/30"],
+                    "mac" : "00:50:56:b7:1e:6f"
+                }
+            ]
+        },
+        "of:f7a6cc37aba92283/1" : {
+            "interfaces" : [
+                {
+                    "name" : "amlight-quagga2",
+                    "ips" : ["190.103.186.151/31"],
+                    "mac" : "00:50:56:b7:1e:6f"
+                }
+            ]
+        },
+        "of:5a90cc37aba923ab/1" : {
+            "interfaces" : [
+                {
+                    "name" : "kreonet-quagga1",
+                    "ips" : ["134.75.108.62/30"],
+                    "mac" : "00:50:56:b7:94:f5"
+                }
+            ]
+        }
+    },
+    "devices" : {
+        "of:bfb1cc37aba9243f" : {
+            "basic" : {
+                "name" : "NCTU-OF2"
+            }
+        },
+        "of:5a90cc37aba923ab" : {
+            "basic" : {
+                "name" : "NCTU-OF1"
+            }
+        },
+        "of:c791cc37aba92361" : {
+            "basic" : {
+                "name" : "NCTU-OF4"
+            }
+        },
+        "of:f7a6cc37aba92283" : {
+            "basic" : {
+                "name" : "NCTU-OF3"
+            }
+        }
+    },
+    "apps" : {
+        "org.onosproject.router" : {
+            "bgp" : {
+                "bgpSpeakers" : [
+                    {
+                        "name" : "quagga1",
+                        "connectPoint" : "of:bfb1cc37aba9243f/1",
+                        "peers" : [
+                            "10.113.1.2",
+                            "10.113.2.2",
+                            "134.75.108.61"
+                        ]
+                    },
+                    {
+                        "name" : "quagga2",
+                        "connectPoint" : "of:c791cc37aba92361/1",
+                        "peers" : [
+                            "10.113.1.6",
+                            "10.113.2.6",
+                            "190.103.186.150"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

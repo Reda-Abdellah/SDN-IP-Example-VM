@@ -1,0 +1,35 @@
+---
+- name: Make quagga configuration dir
+  file:
+    path="{{ QUAGGA_CONFIG_PATH }}"
+    state=directory
+
+- name: Make zebra configuration dir
+  file:
+    path="{{ ZEBRA_CONFIG_PATH }}"
+    state=directory
+
+- name: Copy default quagga configuration files
+  template:
+    src: "templates/{{ item }}.j2"
+    dest: "{{ QUAGGA_CONFIG_PATH }}/{{ item }}"
+    mode: 0644
+  with_items:
+    - quagga_amlight.conf
+    - quagga_internal_1.conf
+    - quagga_internal_2.conf
+    - quagga_krenet.conf
+  tags: quagga
+
+- name: Copy zebra configuration file
+  template:
+    src: "templates/zebra.conf.j2"
+    dest: "{{ ZEBRA_CONFIG_PATH }}/zebra.conf"
+    mode: 0644
+  tags: quagga
+
+- name: Make /root readable for vty
+  file:
+    path: /root
+    mode: 0755
+  tags: quagga

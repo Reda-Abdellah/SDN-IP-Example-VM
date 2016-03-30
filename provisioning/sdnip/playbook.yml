@@ -3,5 +3,9 @@
   vars:
     ansible_python_interpreter: "/usr/bin/python"
   sudo: yes
+  vars_files:
+    - group_vars/config.yml
   roles:
-    - quagga
+    - quagga_config
+    - sdnip_netcfg
+    - sdnip_topo
