@@ -18,7 +18,7 @@
     - quagga_amlight.conf
     - quagga_internal_1.conf
     - quagga_internal_2.conf
-    - quagga_krenet.conf
+    - quagga_kreonet.conf
   tags: quagga
 
 - name: Copy zebra configuration file

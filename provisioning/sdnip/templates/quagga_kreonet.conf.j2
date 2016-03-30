@@ -1,13 +1,13 @@
-! BGP configuration for krenet
+! BGP configuration for kreonet
 !
-hostname krenet
-password krenet
+hostname kreonet
+password kreonet
 !
 !
 router bgp 65111
   bgp router-id 134.75.108.61
   timers bgp 3 9
-
+  network 100.0.0.0/24
   ! ONOS
   neighbor 134.75.108.62 remote-as 65113
   neighbor 134.75.108.62 timers connect 5

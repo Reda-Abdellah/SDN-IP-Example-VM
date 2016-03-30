@@ -81,7 +81,7 @@ class SdnIpTopo(Topo):
       |   +--+---+                  +---+--+
       |      |                          |
       +      |                          |
-    Krenet   |                          |
+   Kreonet   |                          |
              |                          |
              |                          |     Amlight
           +--+---+                  +---+--+     +
