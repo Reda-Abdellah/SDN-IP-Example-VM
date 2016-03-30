@@ -170,6 +170,53 @@ class SdnIpTopo(Topo):
         self.addLink(bgpq2, s4, port1=1, port2=1)
 
 
+        # Kreonet
+        kreonetIntfs = {
+            'kreonet-eth0': {
+                'mac': '00:00:00:00:00:01',
+                'ipAddrs': [
+                    '100.0.0.1/24'
+                ]
+            },
+            'kreonet-eth1': {
+                'mac': '00:00:00:00:00:02',
+                'ipAddrs': [
+                    '134.75.108.61/30'
+                ]
+            }
+        }
+
+        kreonet = self.addHost("kreonet", cls=Router,
+                             quaggaConfFile='%s/quagga_kreonet.conf' % QCONFIG_DIR,
+                             zebraConfFile=zebraConf,
+                             intfDict=kreonetIntfs)
+
+        self.addLink(kreonet, s1, port1=1, port2=1)
+
+        # AmLight
+        amlightIntfs = {
+            'amlight-eth0': {
+                'mac': '00:00:00:00:00:01',
+                'ipAddrs': [
+                    '100.0.1.1/24'
+                ]
+            },
+            'amlight-eth1': {
+                'mac': '00:00:00:00:00:02',
+                'ipAddrs': [
+                    '134.75.108.61/30'
+                ]
+            }
+        }
+
+        amlight = self.addHost("amlight", cls=Router,
+                             quaggaConfFile='%s/quagga_ikreonet.conf' % QCONFIG_DIR,
+                             zebraConfFile=zebraConf,
+                             intfDict=amlightIntfs)
+
+        self.addLink(amlight, s1, port1=1, port2=1)
+
+
 topos = {'sdnip': SdnIpTopo}
 
 if __name__ == '__main__':
