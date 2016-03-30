@@ -214,7 +214,8 @@ class SdnIpTopo(Topo):
                              zebraConfFile=zebraConf,
                              intfDict=amlightIntfs)
 
-        self.addLink(amlight, s1, port1=1, port2=1)
+        self.addLink(amlight, s3, port1=1, port2=1)
+
 
 
 topos = {'sdnip': SdnIpTopo}
