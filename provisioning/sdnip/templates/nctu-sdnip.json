@@ -1,33 +1,5 @@
 {
     "ports" : {
-        "of:bfb1cc37aba9243f/2" : {
-            "interfaces" : [
-                {
-                    "name" : "nctutest2-quagga1",
-                    "ips" : ["10.113.2.1/30"],
-                    "mac" : "00:50:56:b7:94:f5"
-                },
-                {
-                    "name" : "nctutest2-quagga2",
-                    "ips" : ["10.113.2.5/30"],
-                    "mac" : "00:50:56:b7:1e:6f"
-                }
-            ]
-        },
-        "of:c791cc37aba92361/2" : {
-            "interfaces" : [
-                {
-                    "name" : "nctutest-quagga1",
-                    "ips" : ["10.113.1.1/30"],
-                    "mac" : "00:50:56:b7:94:f5"
-                },
-                {
-                    "name" : "nctutest-quagga2",
-                    "ips" : ["10.113.1.5/30"],
-                    "mac" : "00:50:56:b7:1e:6f"
-                }
-            ]
-        },
         "of:f7a6cc37aba92283/1" : {
             "interfaces" : [
                 {
