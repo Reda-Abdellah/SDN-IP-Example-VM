@@ -172,13 +172,13 @@ class SdnIpTopo(Topo):
         # Kreonet
         kreonetIntfs = {
             'kreonet-eth0': {
-                'mac': '00:00:00:00:00:01',
+                'mac': '10:00:00:00:00:01',
                 'ipAddrs': [
                     '100.0.0.1/24'
                 ]
             },
             'kreonet-eth1': {
-                'mac': '00:00:00:00:00:02',
+                'mac': '10:00:00:00:00:02',
                 'ipAddrs': [
                     '134.75.108.61/30'
                 ]
@@ -195,15 +195,15 @@ class SdnIpTopo(Topo):
         # AmLight
         amlightIntfs = {
             'amlight-eth0': {
-                'mac': '00:00:00:00:00:01',
+                'mac': '10:00:00:00:00:03',
                 'ipAddrs': [
                     '100.0.1.1/24'
                 ]
             },
             'amlight-eth1': {
-                'mac': '00:00:00:00:00:02',
+                'mac': '10:00:00:00:00:04',
                 'ipAddrs': [
-                    '134.75.108.61/30'
+                    '190.103.186.150/31'
                 ]
             }
         }
