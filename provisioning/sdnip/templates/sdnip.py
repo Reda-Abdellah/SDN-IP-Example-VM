@@ -14,17 +14,16 @@ ZCONFIG_DIR = '/root/zebra/configs'
 
 
 class SdnIpHost(Host):
-    def __init__(self, name, ip, route, *args, **kwargs):
+    def __init__(self, name, ip, gw, *args, **kwargs):
         Host.__init__(self, name, ip=ip, *args, **kwargs)
 
-        self.route = route
+        self.gw = gw
 
     def config(self, **kwargs):
         Host.config(self, **kwargs)
 
-        debug("configuring route %s" % self.route)
-
-        self.cmd('ip route add default via %s' % self.route)
+        debug("configuring gateway %s" % self.gw)
+        self.cmd('route add default gw %s', self.gw)
 
 
 class Router(Host):
