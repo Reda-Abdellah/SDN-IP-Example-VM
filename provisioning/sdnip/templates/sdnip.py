@@ -38,7 +38,7 @@ class Router(Host):
         Host.config(self, **kwargs)
         self.cmd('sysctl net.ipv4.ip_forward=1')
 
-        for intf, attrs in self.intfDict.items():
+        for intf, attrs in sorted(self.intfDict.items(), key=lambda x: x[0]):
             self.cmd('ip addr flush dev %s' % intf)
 
             # setup mac address to specific interface
