@@ -131,7 +131,7 @@ class SdnIpTopo(Topo):
                              zebraConfFile=zebraConf,
                              intfDict=bgpq1Intfs)
         # eth0
-        self.addLink(bgpq1, tor, port1=0, port2=0)
+        self.addLink(bgpq1, tor, port1=0, port2=1)
 
         # eth1
         self.addLink(bgpq1, s2, port1=1, port2=1)
@@ -159,7 +159,7 @@ class SdnIpTopo(Topo):
                              intfDict=bgpq2Intfs)
 
         # eth0
-        self.addLink(bgpq2, tor, port1=0, port2=1)
+        self.addLink(bgpq2, tor, port1=0, port2=2)
 
         # eth1
         self.addLink(bgpq2, s4, port1=1, port2=1)
