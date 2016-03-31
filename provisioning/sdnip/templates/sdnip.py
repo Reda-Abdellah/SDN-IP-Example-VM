@@ -22,8 +22,8 @@ class SdnIpHost(Host):
     def config(self, **kwargs):
         Host.config(self, **kwargs)
 
-        debug("configuring gateway %s" % self.gw)
-        self.cmd('route add default gw %s', self.gw)
+        debug("configuring gateway %s" % (self.gw, ))
+        self.cmd('route add default gw %s' % (self.gw, ))
 
 
 class Router(Host):
