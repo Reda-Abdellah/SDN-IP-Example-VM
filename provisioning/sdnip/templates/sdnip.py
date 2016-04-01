@@ -23,7 +23,7 @@ class SdnIpHost(Host):
         Host.config(self, **kwargs)
 
         debug("configuring gateway %s" % (self.gw, ))
-        self.cmd('route add default gw %s' % (self.gw, ))
+        self.cmd('ip route add default via %s' % (self.gw, ))
 
 
 class Router(Host):
