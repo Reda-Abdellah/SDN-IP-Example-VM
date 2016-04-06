@@ -125,14 +125,14 @@ class SdnIpTopo(Topo):
         self.addLink(s3, s4, port1=3, port2=3)
 
         # Internal quagga 1
-        bgpq1Intfs = {
-            'bgpq1-eth0': {
+        quagga1Intfs = {
+            'quagga1-eth0': {
                 'mac': '00:00:00:00:01:01',
                 'ipAddrs': [
                     Q1_TOR_IP
                 ]
             },
-            'bgpq1-eth1': {
+            'quagga1-eth1': {
                 'mac': '00:00:00:00:01:02',
                 'ipAddrs': [
                     Q1_KREONET_IP
@@ -140,26 +140,26 @@ class SdnIpTopo(Topo):
             }
         }
 
-        bgpq1 = self.addHost("bgpq1", cls=Router,
+        quagga1 = self.addHost("quagga1", cls=Router,
                              quaggaConfFile='%s/quagga_internal_1.conf' % QCONFIG_DIR,
                              zebraConfFile=zebraConf,
-                             intfDict=bgpq1Intfs)
+                             intfDict=quagga1Intfs)
         # eth0
-        self.addLink(bgpq1, tor, port1=0, port2=1)
+        self.addLink(quagga1, tor, port1=0, port2=1)
 
         # eth1
-        self.addLink(bgpq1, s2, port1=1, port2=1)
+        self.addLink(quagga1, s2, port1=1, port2=1)
 
 
         # Internal quagga 2
-        bgpq2Intfs = {
-            'bgpq2-eth0': {
+        quagga2Intfs = {
+            'quagga2-eth0': {
                 'mac': '00:00:00:00:02:01',
                 'ipAddrs': [
                     Q2_TOR_IP
                 ]
             },
-            'bgpq2-eth1': {
+            'quagga2-eth1': {
                 'mac': '00:00:00:00:02:01',
                 'ipAddrs': [
                     Q2_AMLIGHT_IP
@@ -167,16 +167,16 @@ class SdnIpTopo(Topo):
             }
         }
 
-        bgpq2 = self.addHost("bgpq2", cls=Router,
+        quagga2 = self.addHost("quagga2", cls=Router,
                              quaggaConfFile='%s/quagga_internal_2.conf' % QCONFIG_DIR,
                              zebraConfFile=zebraConf,
-                             intfDict=bgpq2Intfs)
+                             intfDict=quagga2Intfs)
 
         # eth0
-        self.addLink(bgpq2, tor, port1=0, port2=2)
+        self.addLink(quagga2, tor, port1=0, port2=2)
 
         # eth1
-        self.addLink(bgpq2, s4, port1=1, port2=1)
+        self.addLink(quagga2, s4, port1=1, port2=1)
 
 
         # Kreonet
