@@ -4,6 +4,7 @@
     repo: https://github.com/mininet/mininet.git
     dest: /root/mininet
     update: no
+    version: "{{ MININET_VERSION }}"
   tags: mininet
 
 - name: correct dpkg interrupted problem
