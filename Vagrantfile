@@ -19,8 +19,8 @@ Vagrant.configure(2) do |config|
   # Use Virtual Box as provider
   config.vm.provider "virtualbox" do |vbx|
     vbx.name = "onos"
-    vbx.memory = 2048
-    vbx.cpus = 4
+    vbx.memory = 4096
+    vbx.cpus = 2
   end
   playbooks = [
     "basic",
