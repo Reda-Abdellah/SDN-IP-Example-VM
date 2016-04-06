@@ -1,6 +1,6 @@
 {
     "ports" : {
-        "of:f7a6cc37aba92283/1" : {
+        "of:0000000000000003/1" : {
             "interfaces" : [
                 {
                     "name" : "amlight-quagga2",
@@ -9,7 +9,7 @@
                 }
             ]
         },
-        "of:5a90cc37aba923ab/1" : {
+        "of:0000000000000001/1" : {
             "interfaces" : [
                 {
                     "name" : "kreonet-quagga1",
@@ -20,22 +20,22 @@
         }
     },
     "devices" : {
-        "of:bfb1cc37aba9243f" : {
+        "of:0000000000000002" : {
             "basic" : {
                 "name" : "NCTU-OF2"
             }
         },
-        "of:5a90cc37aba923ab" : {
+        "of:0000000000000001" : {
             "basic" : {
                 "name" : "NCTU-OF1"
             }
         },
-        "of:c791cc37aba92361" : {
+        "of:0000000000000004" : {
             "basic" : {
                 "name" : "NCTU-OF4"
             }
         },
-        "of:f7a6cc37aba92283" : {
+        "of:0000000000000003" : {
             "basic" : {
                 "name" : "NCTU-OF3"
             }
@@ -47,14 +47,14 @@
                 "bgpSpeakers" : [
                     {
                         "name" : "quagga1",
-                        "connectPoint" : "of:bfb1cc37aba9243f/1",
+                        "connectPoint" : "of:0000000000000002/1",
                         "peers" : [
                             "134.75.108.61"
                         ]
                     },
                     {
                         "name" : "quagga2",
-                        "connectPoint" : "of:c791cc37aba92361/1",
+                        "connectPoint" : "of:0000000000000004/1",
                         "peers" : [
                             "190.103.186.150"
                         ]

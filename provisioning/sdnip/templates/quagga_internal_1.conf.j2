@@ -1,26 +1,20 @@
-!
-! Zebra configuration saved from vty
-!   2016/03/09 04:25:41
-!
-hostname sdnds-tw-quagga1
-password sdnds-tw-quagga1
+hostname quagga1
+password quagga1
 log file /var/log/quagga/bgpd.log
 !
 router bgp 65113
- bgp router-id 192.168.113.20
+ bgp router-id 192.168.2.10
  timers bgp 3 10
- neighbor 134.75.108.61 remote-as 65111
- neighbor 134.75.108.61 next-hop-self
- neighbor 134.75.108.61 soft-reconfiguration inbound
- neighbor 134.75.108.61 prefix-list KREONET in
- neighbor 192.168.113.10 remote-as 65113
- neighbor 192.168.113.10 port 2000
- neighbor 192.168.113.10 timers connect 5
- neighbor 192.168.113.22 remote-as 65113
- neighbor 192.168.113.22 next-hop-self
- neighbor 192.168.113.22 soft-reconfiguration inbound
-!
-ip prefix-list KREONET seq 1 permit any
-!
-line vty
-!
+
+ neighbor 192.168.2.11 remote-as 65111
+ neighbor 192.168.2.11 ebgp-multihop
+ neighbor 192.168.2.11 timers connect 5
+ neighbor 192.168.2.11 advertisement-interval 5
+
+ neighbor 192.168.1.10 remote-as 65113
+ neighbor 192.168.1.10 port 2000
+ neighbor 192.168.1.10 timers connect 5
+
+ neighbor 192.168.1.12 remote-as 65113
+ neighbor 192.168.1.12 next-hop-self
+ neighbor 192.168.1.12 soft-reconfiguration inbound

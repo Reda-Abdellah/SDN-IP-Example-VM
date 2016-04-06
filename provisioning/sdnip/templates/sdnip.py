@@ -12,6 +12,22 @@ QUAGGA_RUN_DIR = '/var/run/quagga'
 QCONFIG_DIR = '/root/quagga/configs'
 ZCONFIG_DIR = '/root/zebra/configs'
 
+ONOS_TOR_IP = '192.168.1.10/24'
+Q1_TOR_IP = '192.168.1.11/24'
+Q2_TOR_IP = '192.168.1.12/24'
+
+Q1_KREONET_IP = '192.168.2.10/24'
+KREONET_Q1_IP = '192.168.2.11/24'
+
+Q2_AMLIGHT_IP = '192.168.3.10/24'
+AMLIGHT_Q2_IP = '192.168.3.11/24'
+
+AMLIGHT_INTERNAL_IP = '192.168.4.1/24'
+AMLIGHT_HOST_IP = '192.168.4.10/24'
+
+KREONET_INTERNAL_IP = '192.168.5.1/24'
+KREONET_HOST_IP = '192.168.5.10/24'
+
 
 class SdnIpHost(Host):
     def __init__(self, name, ip, gw, *args, **kwargs):
@@ -98,11 +114,11 @@ class SdnIpTopo(Topo):
 
     def build(self):
         zebraConf = '{}/zebra.conf'.format(ZCONFIG_DIR)
-        tor = self.addSwitch('tor', cls=OVSKernelSwitch, failMode='standalone', dpid='0000000000000001')
-        s1 = self.addSwitch('s1', dpid='5a90cc37aba923ab', cls=OVSKernelSwitch, protocols='OpenFlow13')
-        s2 = self.addSwitch('s2', dpid='bfb1cc37aba9243f', cls=OVSKernelSwitch, protocols='OpenFlow13')
-        s3 = self.addSwitch('s3', dpid='f7a6cc37aba92283', cls=OVSKernelSwitch, protocols='OpenFlow13')
-        s4 = self.addSwitch('s4', dpid='c791cc37aba92361', cls=OVSKernelSwitch, protocols='OpenFlow13')
+        tor = self.addSwitch('tor', cls=OVSKernelSwitch, failMode='standalone', dpid='0000000000000010')
+        s1 = self.addSwitch('s1', dpid='0000000000000001', cls=OVSKernelSwitch, protocols='OpenFlow13')
+        s2 = self.addSwitch('s2', dpid='0000000000000002', cls=OVSKernelSwitch, protocols='OpenFlow13')
+        s3 = self.addSwitch('s3', dpid='0000000000000003', cls=OVSKernelSwitch, protocols='OpenFlow13')
+        s4 = self.addSwitch('s4', dpid='0000000000000004', cls=OVSKernelSwitch, protocols='OpenFlow13')
         self.addLink(s1, s2, port1=3, port2=3)
         self.addLink(s1, s4, port1=4, port2=4)
         self.addLink(s3, s2, port1=4, port2=4)
@@ -111,15 +127,15 @@ class SdnIpTopo(Topo):
         # Internal quagga 1
         bgpq1Intfs = {
             'bgpq1-eth0': {
-                'mac': '00:50:56:b7:3e:dd',
+                'mac': '00:00:00:00:01:01',
                 'ipAddrs': [
-                    '192.168.113.20/24'
+                    Q1_TOR_IP
                 ]
             },
             'bgpq1-eth1': {
-                'mac': '00:50:56:B7:94:F5',
+                'mac': '00:00:00:00:01:02',
                 'ipAddrs': [
-                    '134.75.108.62/30'
+                    Q1_KREONET_IP
                 ]
             }
         }
@@ -138,15 +154,15 @@ class SdnIpTopo(Topo):
         # Internal quagga 2
         bgpq2Intfs = {
             'bgpq2-eth0': {
-                'mac': '00:50:56:b7:04:60',
+                'mac': '00:00:00:00:02:01',
                 'ipAddrs': [
-                    '192.168.113.22/24'
+                    Q2_TOR_IP
                 ]
             },
             'bgpq2-eth1': {
-                'mac': '00:50:56:b7:1e:6f',
+                'mac': '00:00:00:00:02:01',
                 'ipAddrs': [
-                    '190.103.186.151/31'
+                    Q2_AMLIGHT_IP
                 ]
             }
         }
@@ -166,15 +182,15 @@ class SdnIpTopo(Topo):
         # Kreonet
         kreonetIntfs = {
             'kreonet-eth0': {
-                'mac': '10:00:00:00:00:01',
+                'mac': '00:00:00:00:03:01',
                 'ipAddrs': [
-                    '100.0.0.1/24'
+                    KREONET_INTERNAL_IP
                 ]
             },
             'kreonet-eth1': {
-                'mac': '10:00:00:00:00:02',
+                'mac': '00:00:00:00:03:02',
                 'ipAddrs': [
-                    '134.75.108.61/30'
+                    KREONET_Q1_IP
                 ]
             }
         }
@@ -188,22 +204,22 @@ class SdnIpTopo(Topo):
 
         # host behind kreonet
         k_host = self.addHost("khost", cls=SdnIpHost,
-                              ip="100.0.0.10/24",
-                              gw="100.0.0.1")
+                              ip=KREONET_HOST_IP,
+                              gw=KREONET_INTERNAL_IP[:-3])
         self.addLink(kreonet, k_host, port1=0, port2=0)
 
         # AmLight
         amlightIntfs = {
             'amlight-eth0': {
-                'mac': '10:00:00:00:00:03',
+                'mac': '00:00:00:00:04:01',
                 'ipAddrs': [
-                    '100.0.1.1/24'
+                    AMLIGHT_INTERNAL_IP
                 ]
             },
             'amlight-eth1': {
-                'mac': '10:00:00:00:00:04',
+                'mac': '00:00:00:00:04:02',
                 'ipAddrs': [
-                    '190.103.186.150/31'
+                    AMLIGHT_Q2_IP
                 ]
             }
         }
@@ -218,8 +234,8 @@ class SdnIpTopo(Topo):
 
         # host behind amlight
         a_host = self.addHost("ahost", cls=SdnIpHost,
-                              ip="100.0.1.10/24",
-                              gw="100.0.1.1")
+                              ip=AMLIGHT_HOST_IP,
+                              gw=AMLIGHT_INTERNAL_IP[:-3])
         self.addLink(amlight, a_host, port1=0, port2=0)
 
 
@@ -237,7 +253,7 @@ if __name__ == '__main__':
     for i in range(1, 5):
         net.get('s%d' % i).start([c0])
 
-    net.get('tor').cmd('ip addr add 192.168.113.10/24 dev tor')
+    net.get('tor').cmd('ip addr add %s dev tor' % (ONOS_TOR_IP, ))
     CLI(net)
     net.stop()
 
