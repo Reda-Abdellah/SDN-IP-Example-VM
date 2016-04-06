@@ -1,0 +1,15 @@
+export ONOS_CELL=sdnds-tw
+
+export OC1="{{ ansible_eth0.ipv4.address }}"
+export OCI="{{ ansible_eth0.ipv4.address }}"
+export OCN="{{ ansible_eth0.ipv4.address }}"
+export ONOS_USER="root"
+export ONOS_GROUP="root"
+export ONOS_WEB_USER="sdndstw"
+export ONOS_WEB_PASS="sdndstw"
+export ONOS_USE_SSH=true
+export ONOS_APPS="drivers,openflow"
+export KARAF_ROOT=$HOME/Applications/apache-karaf-3.0.5
+export KARAF_VERSION=3.0.5
+export KARAF_LOG=$HOME/Applications/apache-karaf-3.0.5/data/log/karaf.log
+export MAVEN=$HOME/Applications/apache-maven-3.3.1

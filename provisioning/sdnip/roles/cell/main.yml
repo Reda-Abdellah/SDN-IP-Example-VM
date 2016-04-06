@@ -1,0 +1,7 @@
+---
+- name: Create sdnds cell file
+  template:
+    src: "sdnds.cell.j2"
+    dest: "/root"
+    mode: 0644
+  tags: cell
