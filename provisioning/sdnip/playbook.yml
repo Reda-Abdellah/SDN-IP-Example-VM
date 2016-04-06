@@ -9,3 +9,5 @@
     - quagga_config
     - sdnip_netcfg
     - sdnip_topo
+    - cell
+    - help
