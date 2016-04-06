@@ -242,7 +242,7 @@ class SdnIpTopo(Topo):
 topos = {'sdnip': SdnIpTopo}
 
 if __name__ == '__main__':
-    setLogLevel('debug')
+    # setLogLevel('debug')
     topo = SdnIpTopo()
 
     net = Mininet(topo=topo, controller=None)
