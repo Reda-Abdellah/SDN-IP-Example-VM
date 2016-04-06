@@ -5,4 +5,4 @@ DOWNLOADS_PATH: "/root/Downloads"
 QUAGGA_CONFIG_PATH: "/root/quagga/configs"
 ZEBRA_CONFIG_PATH: "/root/zebra/configs"
 HOME_PATH: "/root"
-ONOS_CELL: sdnds.cell
+ONOS_CELL: sdnds-tw

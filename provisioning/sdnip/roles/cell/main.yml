@@ -1,7 +1,7 @@
 ---
-- name: Create sdnds cell file
+- name: Create cell file
   template:
-    src: "sdnds.cell.j2"
-    dest: "/root"
+    src: "{{ ONOS_CELL }}.j2"
+    dest: "{{ ONOS_ROOT }}/tools/test/cells/sdnds-tw"
     mode: 0644
   tags: cell
