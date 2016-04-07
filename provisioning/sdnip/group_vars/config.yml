@@ -1,6 +1,7 @@
 ---
 # paths
 APP_PATH: "/root/Applications"
+KARAF_PATH: "{{ APP_PATH }}/apache-karaf-3.0.5"
 DOWNLOADS_PATH: "/root/Downloads"
 QUAGGA_CONFIG_PATH: "/root/quagga/configs"
 ZEBRA_CONFIG_PATH: "/root/zebra/configs"
