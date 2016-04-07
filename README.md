@@ -44,20 +44,20 @@ $ cell
 $ ok clean
 ```
 
-- In ONOS console, start fwd and sdnip apps
+- In ONOS console, start proxyarp and fwd app
 ```
+onos> app activate org.onosproject.proxyarp
 onos> app activate org.onosproject.fwd
-onos> app activate org.onosproject.sdnip
 ```
 
-- Push ONOS network configuration
-```bash
-$ onos-netcfg $OC1 sdnds-sdnip.json
-```
-
-- Start demo mininet
+- Start demo mininet, let routers exchange their information
 ```bash
 $ ./sdnip.py
+```
+
+- Active sdnip application on ONOS console
+```
+onos> app activate org.onosproject.sdnip
 ```
 
 - Use ```routes``` command in ONOS console, should get all network routes
