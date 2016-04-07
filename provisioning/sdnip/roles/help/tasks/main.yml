@@ -1,15 +1,9 @@
 ---
 - name: Create onos-ansible-help.txt
   template:
-    src: "onos-start.sh.j2"
-    dest: "{{ HOME_PATH }}onos-start.sh"
-    mode: 0775
-  tags: help
-
-- name: Copy onos-start.sh
-  copy:
     src: "onos-start.sh"
     dest: "{{ HOME_PATH }}onos-start.sh"
     mode: 0775
     force: yes
   tags: help
+
