@@ -24,9 +24,9 @@ Vagrant.configure(2) do |config|
   end
   playbooks = [
     "basic",
-	  "onos-ansible",
-	  "mininet",
-	  "quagga",
+    "onos-ansible",
+    "mininet",
+    "quagga",
     "sdnip"
   ]
 
