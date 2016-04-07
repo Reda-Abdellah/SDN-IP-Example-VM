@@ -1,6 +1,6 @@
 ---
 - name: copy SDN IP net config
   template:
-    src: templates/nctu-sdnip.json
-    dest: /root/nctu-sdnip.json
+    src: templates/sdnds-sdnip.json
+    dest: /root/sdnds-sdnip.json
     mode: 0644
