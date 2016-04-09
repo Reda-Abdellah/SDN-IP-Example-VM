@@ -3,6 +3,7 @@
   vars:
     ansible_python_interpreter: "/usr/bin/python"
   become: yes
+  become_user: root
   become_method: sudo
   vars_files:
     - group_vars/config.yml
