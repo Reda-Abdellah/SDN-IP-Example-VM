@@ -1,0 +1,37 @@
+---
+- name: "Install gobgpd and gobgp by 'go get' command"
+  shell: "{{ GO_HOME }}/bin/go get github.com/osrg/gobgp/{{ item }}"
+  args:
+    chdir: "{{ HOME_PATH }}"
+    executable: /bin/bash
+  with_items:
+    - "gobgpd"
+    - "gobgp"
+  environment:
+    GOROOT: "{{ GO_HOME }}"
+    GOPATH: "{{ HOME_PATH }}/gopath"
+  tags: gobgp
+
+- name: Add CLI's tab completion for gobgp
+  get_url:
+    url: https://raw.githubusercontent.com/osrg/gobgp/master/tools/completion/{{ item }}
+    dest: "{{ HOME_PATH }}/.{{ item }}"
+  with_items:
+    - "gobgp-completion.bash"
+    - "gobgp-static-completion.bash"
+    - "gobgp-dynamic-completion.bash"
+  tags: gobgp
+
+- name: Add "~/." before gobgp-static-completion.bash and gobgp-dynamic-completion.bash in gobgp-completion.bash
+  replace:
+    dest: "{{ HOME_PATH }}/.gobgp-completion.bash"
+    regexp: '\./gobgp-([a-z]+)-completion\.bash'
+    replace: '~/.gobgp-\1-completion.bash'
+  tags: gobgp
+
+- name: Append source file in bashrc
+  lineinfile:
+    dest: "~/.bashrc"
+    line: "source ~/.gobgp-completion.bash"
+    mode: 0644
+  tags: gobgp
