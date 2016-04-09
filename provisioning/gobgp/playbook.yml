@@ -2,7 +2,8 @@
 - hosts: onos-master
   vars:
     ansible_python_interpreter: "/usr/bin/python"
-  sudo: yes
+  become: yes
+  become_method: sudo
   vars_files:
     - group_vars/config.yml
     - group_vars/version.yml
