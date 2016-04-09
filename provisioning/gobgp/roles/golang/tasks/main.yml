@@ -2,6 +2,8 @@
 - name: Set url for go language source
   set_fact:
     GOLANG_URL: "https://storage.googleapis.com/golang/go{{ GO_VERSION }}.linux-amd64.tar.gz"
+  tags: golang
+
 - name: Create Downloads directory
   file: path={{ DOWNLOADS_PATH }} state=directory
   tags: golang
@@ -14,6 +16,10 @@
   get_url:
     url: "{{ GOLANG_URL }}"
     dest: "{{ DOWNLOADS_PATH }}"
+  tags: golang
+
+- name: Create directory for GOPATH
+  file: path={{ HOME_PATH }}/gopath state=directory
   tags: golang
 
 - name: Untar go language
