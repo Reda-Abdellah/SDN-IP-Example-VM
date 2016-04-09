@@ -1,4 +1,5 @@
 ---
-APPLICATIONS_PATH: "~/Applications"
-DOWNLOADS_PATH: "~/Downloads"
-HOME_PATH: "~/"
+APPLICATIONS_PATH: "/root/Applications"
+DOWNLOADS_PATH: "/root/Downloads"
+HOME_PATH: "/root"
+GO_HOME: "/root/Applications/go"
