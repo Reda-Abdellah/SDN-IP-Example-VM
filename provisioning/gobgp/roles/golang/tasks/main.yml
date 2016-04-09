@@ -1,0 +1,44 @@
+---
+- name: Set url for go language source
+  set_fact:
+    GOLANG_URL: "https://storage.googleapis.com/golang/go{{ GO_VERSION }}.linux-amd64.tar.gz"
+- name: Create Downloads directory
+  file: path={{ DOWNLOADS_PATH }} state=directory
+  tags: golang
+
+- name: Create Applications directory
+  file: path={{ APPLICATIONS_PATH }} state=directory
+  tags: golang
+
+- name: Download go language
+  get_url:
+    url: "{{ GOLANG_URL }}"
+    dest: "{{ DOWNLOADS_PATH }}"
+  tags: golang
+
+- name: Untar go language
+  unarchive:
+    copy: no
+    src: "{{ DOWNLOADS_PATH }}/go{{ GO_VERSION }}.linux-amd64.tar.gz"
+    dest: "{{ APPLICATIONS_PATH }}"
+  tags: golang
+
+- name: Append enviroment variables in bashrc
+  template:
+    src: "go_env.j2"
+    dest: "~/.go_env"
+    mode: 0444
+  tags: golang
+
+- name: Append source file in bashrc
+  lineinfile:
+    dest: "~/.bashrc"
+    line: "source ~/.go_env"
+    mode: 0644
+  tags: golang
+
+- name: Source bashrc
+  shell: source {{ HOME_PATH }}/.bashrc
+  args:
+    executable: /bin/bash
+  tags: golang
