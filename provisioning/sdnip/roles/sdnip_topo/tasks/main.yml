@@ -1,6 +1,9 @@
 ---
-- name: copy SDN IP topology script
+- name: Copy SDN IP topology script
   template:
-    src: templates/sdnip.py
-    dest: /root/sdnip.py
+    src: "templates/{{ item }}"
+    dest: "/root/{{ item }}"
     mode: 0755
+  with_items:
+    - "sdnip_quagga.py"
+    - "sdnip_gobgp.py"
