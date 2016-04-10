@@ -7,6 +7,7 @@
     - group_vars/config.yml
   roles:
     - quagga_config
+    - gobgp_config
     - sdnip_netcfg
     - sdnip_topo
     - cell
