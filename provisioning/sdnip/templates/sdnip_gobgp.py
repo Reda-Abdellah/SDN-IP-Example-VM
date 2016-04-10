@@ -68,11 +68,11 @@ class Router(Host):
                 self.cmd('ip addr add %s dev %s' % (addr, intf))
 
         self.cmd('/usr/lib/quagga/zebra -d -f %s -z %s/zebra%s.api -i %s/zebra%s.pid' % (self.zebraConfFile, QUAGGA_RUN_DIR, self.name, QUAGGA_RUN_DIR, self.name))
-        self.cmd('%s/gobgp -f %s' % (GOBGP_DIR, self.gobgpConfFile))
+        self.cmd('%s/gobgpd -f %s &' % (GOBGP_DIR, self.gobgpConfFile))
 
     def terminate(self):
         self.cmd("ps ax | egrep gobgpd | awk '{ print $1 }' | xargs kill -9")
-        self.cmd("ps ax | egrep 'zebra%s.pid' | awk '{print $1}' | xargs kill" % (self.name, self.name))
+        self.cmd("ps ax | egrep 'zebra%s.pid' | awk '{print $1}' | xargs kill" % (self.name, ))
 
         Host.terminate(self)
 
@@ -125,7 +125,7 @@ class SdnIpTopo(Topo):
         self.addLink(s3, s2, port1=4, port2=4)
         self.addLink(s3, s4, port1=3, port2=3)
 
-        # Internal quagga 1
+        # Internal gobgp 1
         gobgp1Intfs = {
             'gobgp1-eth0': {
                 'mac': '00:00:00:00:01:01',
@@ -142,7 +142,7 @@ class SdnIpTopo(Topo):
         }
 
         gobgp1 = self.addHost("gobgp1", cls=Router,
-                             quaggaConfFile='%s/quagga_internal_1.conf' % QCONFIG_DIR,
+                             gobgpConfFile='%s/gobgp_internal_1.conf' % GCONFIG_DIR,
                              zebraConfFile=zebraConf,
                              intfDict=gobgp1Intfs)
         # eth0
@@ -152,7 +152,7 @@ class SdnIpTopo(Topo):
         self.addLink(gobgp1, s2, port1=1, port2=1)
 
 
-        # Internal quagga 2
+        # Internal gobgp 2
         gobgp2Intfs = {
             'gobgp2-eth0': {
                 'mac': '00:00:00:00:02:01',
@@ -169,7 +169,7 @@ class SdnIpTopo(Topo):
         }
 
         gobgp2 = self.addHost("gobgp2", cls=Router,
-                             quaggaConfFile='%s/quagga_internal_2.conf' % QCONFIG_DIR,
+                             gobgpConfFile='%s/gobgp_internal_2.conf' % GCONFIG_DIR,
                              zebraConfFile=zebraConf,
                              intfDict=gobgp2Intfs)
 
@@ -197,7 +197,7 @@ class SdnIpTopo(Topo):
         }
 
         kreonet = self.addHost("kreonet", cls=Router,
-                             quaggaConfFile='%s/quagga_kreonet.conf' % QCONFIG_DIR,
+                             gobgpConfFile='%s/gobgp_kreonet.conf' % GCONFIG_DIR,
                              zebraConfFile=zebraConf,
                              intfDict=kreonetIntfs)
 
@@ -227,7 +227,7 @@ class SdnIpTopo(Topo):
 
 
         amlight = self.addHost("amlight", cls=Router,
-                             quaggaConfFile='%s/quagga_amlight.conf' % QCONFIG_DIR,
+                             gobgpConfFile='%s/gobgp_amlight.conf' % GCONFIG_DIR,
                              zebraConfFile=zebraConf,
                              intfDict=amlightIntfs)
 
