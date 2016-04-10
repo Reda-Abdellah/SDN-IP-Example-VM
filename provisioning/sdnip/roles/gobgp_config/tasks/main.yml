@@ -1,0 +1,18 @@
+---
+- name: Make gobgp configuration dir
+  file:
+    path="{{ GOBGP_CONFIG_PATH }}"
+    state=directory
+  tags: gobgp
+
+- name: Copy default gobgp configuration files
+  template:
+    src: "templates/{{ item }}.j2"
+    dest: "{{ GOBGP_CONFIG_PATH }}/{{ item }}"
+    mode: 0644
+  with_items:
+    - "gobgp_amlight.conf"
+    - "gobgp_internal_1.conf"
+    - "gobgp_internal_2.conf"
+    - "gobgp_kreonet.conf"
+  tags: gobgp
