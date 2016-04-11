@@ -28,7 +28,8 @@ Vagrant.configure(2) do |config|
     "onos-ansible",
     "mininet",
     "quagga",
-    "sdnip"
+    "sdnip",
+    "gobgp"
   ]
 
   playbooks.each do |bookname|
