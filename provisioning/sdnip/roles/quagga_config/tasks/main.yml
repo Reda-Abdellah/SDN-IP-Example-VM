@@ -11,7 +11,7 @@
 
 - name: Copy default quagga configuration files
   template:
-    src: "templates/{{ item }}.j2"
+    src: "templates/{{ item }}"
     dest: "{{ QUAGGA_CONFIG_PATH }}/{{ item }}"
     mode: 0644
   with_items:
@@ -23,9 +23,13 @@
 
 - name: Copy zebra configuration file
   template:
-    src: "templates/zebra.conf.j2"
-    dest: "{{ ZEBRA_CONFIG_PATH }}/zebra.conf"
+    src: "templates/{{ item }}"
+    dest: "{{ ZEBRA_CONFIG_PATH }}/{{ item }}"
     mode: 0644
+  with_items:
+    - "zebra.conf"
+    - "zebra_amlight.conf"
+    - "zebra_kreonet.conf"
   tags: quagga
 
 - name: Make /root readable for vty

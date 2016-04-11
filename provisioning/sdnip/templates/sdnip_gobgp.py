@@ -198,7 +198,7 @@ class SdnIpTopo(Topo):
 
         kreonet = self.addHost("kreonet", cls=Router,
                              gobgpConfFile='%s/gobgp_kreonet.conf' % GCONFIG_DIR,
-                             zebraConfFile=zebraConf,
+                             zebraConfFile='{}/zebra_kreonet.conf'.format(ZCONFIG_DIR),
                              intfDict=kreonetIntfs)
 
         self.addLink(kreonet, s1, port1=1, port2=1)
@@ -228,7 +228,7 @@ class SdnIpTopo(Topo):
 
         amlight = self.addHost("amlight", cls=Router,
                              gobgpConfFile='%s/gobgp_amlight.conf' % GCONFIG_DIR,
-                             zebraConfFile=zebraConf,
+                             zebraConfFile='{}/zebra_amlight.conf'.format(ZCONFIG_DIR),
                              intfDict=amlightIntfs)
 
         self.addLink(amlight, s3, port1=1, port2=1)
