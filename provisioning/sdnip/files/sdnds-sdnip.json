@@ -1,0 +1,66 @@
+{
+    "ports" : {
+        "of:0000000000000003/1" : {
+            "interfaces" : [
+                {
+                    "name" : "amlight-quagga2",
+                    "ips" : ["192.168.3.11/24"],
+                    "mac" : "00:00:00:00:04:02"
+                }
+            ]
+        },
+        "of:0000000000000001/1" : {
+            "interfaces" : [
+                {
+                    "name" : "kreonet-quagga1",
+                    "ips" : ["192.168.2.11/24"],
+                    "mac" : "00:00:00:00:03:02"
+                }
+            ]
+        }
+    },
+    "devices" : {
+        "of:0000000000000002" : {
+            "basic" : {
+                "name" : "NCTU-OF2"
+            }
+        },
+        "of:0000000000000001" : {
+            "basic" : {
+                "name" : "NCTU-OF1"
+            }
+        },
+        "of:0000000000000004" : {
+            "basic" : {
+                "name" : "NCTU-OF4"
+            }
+        },
+        "of:0000000000000003" : {
+            "basic" : {
+                "name" : "NCTU-OF3"
+            }
+        }
+    },
+    "apps" : {
+        "org.onosproject.router" : {
+            "bgp" : {
+                "bgpSpeakers" : [
+                    {
+                        "name" : "quagga1",
+                        "connectPoint" : "of:0000000000000002/1",
+                        "peers" : [
+                            "192.168.2.10"
+                        ]
+                    },
+                    {
+                        "name" : "quagga2",
+                        "connectPoint" : "of:0000000000000004/1",
+                        "peers" : [
+                            "192.168.3.10"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}
