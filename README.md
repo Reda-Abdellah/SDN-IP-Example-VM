@@ -1,7 +1,7 @@
 SDN-IP tutorial VM
 ----
 
-This Repo Include:
+This repo includes:
 
 - Vargent VM
 - Ansible files for:
@@ -9,8 +9,15 @@ This Repo Include:
   - mininet, include SDN-IP sample topology script.
   - ONOS, include Karaf, Maven, Java 8.
   - quagga, include sample configuration files.
+  - gobgp, include sample configuration files.
 
-How to install:
+Basic requirements:
+
+- VirtualBox 5 or higher.
+- 8GB memory or higher.
+- 10 GB space or higher.
+
+How to install demo vm:
 
 - Clone submodules
 ```bash
@@ -47,20 +54,24 @@ $ ok clean
 - In ONOS console, start proxyarp and fwd app
 ```
 onos> app activate org.onosproject.proxyarp
-onos> app activate org.onosproject.fwd
+onos> app activate org.onosproject.sdnip
+```
+
+- Push SDN-IP network config
+```bash
+$ onos-netcfg $OC1 sdndstw-sdnip.json
 ```
 
 - Start demo mininet, let routers exchange their information
 ```bash
-$ ./sdnip.py
+$ # For Quagga version
+$ ./sdnip_quagga.py
+
+$ # For GoBGP version
+$ ./sdnip_gobgp.py
 ```
 
-- Active sdnip application on ONOS console
-```
-onos> app activate org.onosproject.sdnip
-```
-
-- Use ```routes``` command in ONOS console, should get all network routes
+- Use ```routes``` command in ONOS console, should get all network routes (might be different between Quagga and GobGP version)
 ```bash
 onos> routes
    Network            Next Hop
