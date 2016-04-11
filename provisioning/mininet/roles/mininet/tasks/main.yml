@@ -18,3 +18,11 @@
   args:
     chdir: /root/mininet
   tags: mininet
+
+- name: Fix sshd_config
+  lineinfile: dest=/etc/ssh/sshd_config regexp="UsePAM yesAddressFamily inet" line="UsePAM yes"
+  tags: mininet
+
+- name: Append 'AddressFamily inet' in sshd_config
+  lineinfile: dest=/etc/ssh/sshd_config line="AddressFamily inet"
+  tags: mininet
