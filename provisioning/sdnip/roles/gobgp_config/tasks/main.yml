@@ -7,7 +7,7 @@
 
 - name: Copy default gobgp configuration files
   template:
-    src: "templates/{{ item }}.j2"
+    src: "templates/{{ item }}"
     dest: "{{ GOBGP_CONFIG_PATH }}/{{ item }}"
     mode: 0644
   with_items:
