@@ -23,6 +23,7 @@ Basically, we emulate SDN-IP topology from [Taiwan NCTU](http://www.nctu.edu.tw/
 
 More information, see our [intro video](https://www.youtube.com/watch?v=a8LR1DyzGY4) or [slide](http://www.slideshare.net/FeiJiSiao/global-sdnip-deployment-at-nctu-taiwan)
 ![SDN-IP topology](https://raw.githubusercontent.com/sdnds-tw/SDN-IP-Example-VM/master/screenshots/SDNIP-Topology.jpg)
+![ONOS traffic result](https://raw.githubusercontent.com/sdnds-tw/SDN-IP-Example-VM/master/screenshots/screenshot1.png)
 
 Getting started:
 See [Getting Started](https://github.com/sdnds-tw/SDN-IP-Example-VM/wiki/Getting-started)
