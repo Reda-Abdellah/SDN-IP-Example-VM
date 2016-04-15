@@ -10,8 +10,8 @@
     state=directory
 
 - name: Copy default quagga configuration files
-  template:
-    src: "templates/{{ item }}"
+  copy:
+    src: "files/{{ item }}"
     dest: "{{ QUAGGA_CONFIG_PATH }}/{{ item }}"
     mode: 0644
   with_items:
@@ -22,9 +22,9 @@
   tags: quagga
 
 - name: Copy zebra configuration file
-  template:
-    src: "templates/{{ item }}"
-    dest: "{{ ZEBRA_CONFIG_PATH }}/{{ item }}"
+  copy:
+    src: "files/zebra.conf"
+    dest: "{{ ZEBRA_CONFIG_PATH }}/zebra.conf"
     mode: 0644
   with_items:
     - "zebra.conf"
