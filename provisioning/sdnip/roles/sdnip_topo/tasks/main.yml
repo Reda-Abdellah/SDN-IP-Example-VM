@@ -1,8 +1,8 @@
 ---
 - name: Copy SDN IP topology script
   copy:
-    src: files/sdnip.py
-    dest: /root/sdnip.py
+    src: "files/{{ item }}"
+    dest: "/root/{{ item }}"
     mode: 0755
   with_items:
     - "sdnip_quagga.py"
