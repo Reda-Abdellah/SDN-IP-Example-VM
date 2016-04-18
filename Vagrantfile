@@ -29,7 +29,8 @@ Vagrant.configure(2) do |config|
     "mininet",
     "quagga",
     "sdnip",
-    "gobgp"
+    "gobgp",
+    "ryu"
   ]
 
   playbooks.each do |bookname|
