@@ -10,12 +10,15 @@ This repo includes:
   - ONOS, include Karaf, Maven, Java 8.
   - quagga, include sample configuration files.
   - gobgp, include sample configuration files.
+  - Ryu SDN-IP, SDN-IP implemented by Ryu SDN framework
 
 Basic requirements:
 
 - VirtualBox 5 or higher.
 - 8GB memory or higher.
 - 10 GB space or higher.
+- Ansible 2.0.1.0 or higher
+- Vagrant 1.8.1 or higher
 
 Topology:
 
