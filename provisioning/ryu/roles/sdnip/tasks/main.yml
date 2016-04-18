@@ -1,0 +1,11 @@
+---
+- name: Clone Ryu SDN-IP
+  git:
+    repo: https://github.com/TakeshiTseng/Ryu-SDN-IP
+    dest: /root/Ryu-SDN-IP
+    update: no
+    version: "{{ RYU_SDN_IP_VERSION }}"
+- name: Copy config file
+  copy:
+    src: files/config.json
+    dest: /root/Ryu-SDN-IP/config.json

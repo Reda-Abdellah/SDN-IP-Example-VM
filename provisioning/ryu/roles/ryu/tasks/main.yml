@@ -1,0 +1,21 @@
+---
+- name: Clone Ryu
+  git:
+    repo: https://github.com/osrg/ryu.git
+    dest: /root/ryu
+    update: no
+    version: "{{ RYU_VERSION }}"
+  tags: ryu
+- name: Install requirements
+  shell: pip install -r tools/pip-requires
+  args:
+    chdir: /root/ryu
+  tags: ryu
+- name: Install Ryu
+  shell: python setup.py install
+  args:
+    chdir: /root/ryu
+  tags: ryu
+- name: Upgrade six
+  shell: pip install six --upgrade
+  tags: ryu

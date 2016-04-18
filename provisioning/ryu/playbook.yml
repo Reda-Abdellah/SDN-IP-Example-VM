@@ -1,0 +1,11 @@
+---
+- hosts: onos-master
+  vars:
+    ansible_python_interpreter: "/usr/bin/python"
+  sudo: yes
+  vars_files:
+    - group_vars/config.yml
+    - group_vars/versions.yml
+  roles:
+    - ryu
+    - sdnip
