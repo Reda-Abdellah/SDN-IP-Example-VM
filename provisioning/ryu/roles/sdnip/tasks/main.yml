@@ -5,6 +5,9 @@
     dest: /root/Ryu-SDN-IP
     update: no
     version: "{{ RYU_SDN_IP_VERSION }}"
+- name: Install networkx
+  pip:
+    name: networkx
 - name: Copy config file
   copy:
     src: files/config.json
