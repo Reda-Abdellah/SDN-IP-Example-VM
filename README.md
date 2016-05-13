@@ -17,8 +17,8 @@ Basic requirements:
 - VirtualBox 5 or higher.
 - 8GB memory or higher.
 - 10 GB space or higher.
-- Ansible 2.0.1.0 or higher
-- Vagrant 1.8.1 or higher
+- [Ansible](https://www.ansible.com/) 2.0.1.0 or higher
+- [Vagrant](https://www.vagrantup.com/) 1.8.1 or higher
 
 Topology:
 
