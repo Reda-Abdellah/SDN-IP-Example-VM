@@ -10,7 +10,7 @@
     id: 58118E89F3A912897C070ADBF76221572C52609D
   tags: docker
 
-- name: Add Repo
+- name: Add Docker APT Repo
   apt_repository:
     repo: deb https://apt.dockerproject.org/repo ubuntu-xenial main
   tags: docker
