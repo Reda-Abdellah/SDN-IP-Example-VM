@@ -1,0 +1,13 @@
+---
+- name: Check docker status
+  shell: systemctl status docker
+
+- name: Add vagrant to docker group
+  user:
+    name: vagrant
+    groups: docker,sudo
+    append: yes
+
+- name: Pull basic docker images
+  docker_image:
+    name: ubuntu
