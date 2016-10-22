@@ -8,6 +8,6 @@
     groups: docker,sudo
     append: yes
 
-- name: Pull basic docker images
+- name: Pull basic Docker image
   docker_image:
     name: ubuntu
