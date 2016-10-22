@@ -4,7 +4,7 @@
 # ONOS + mininet + quagga
 Vagrant.configure(2) do |config|
 
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/xenial64"
   config.vm.hostname = "onos"
   config.vm.network "forwarded_port", guest: 8181, host: 8181
   config.vm.network "private_network", type: "dhcp"
