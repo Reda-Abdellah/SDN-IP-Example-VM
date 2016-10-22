@@ -1,0 +1,8 @@
+- hosts: all
+  vars:
+    ansible_python_interpreter: "/usr/bin/python"
+  become: true
+  become_user: root
+  roles:
+    - apt
+    - docker
