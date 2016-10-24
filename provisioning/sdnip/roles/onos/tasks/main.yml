@@ -1,3 +1,0 @@
----
-- name: Add sdnds-tw user to karaf
-  lineinfile: dest={{ KARAF_PATH }}/etc/users.properties line="sdndstw = sdndstw,_g_:admingroup"
