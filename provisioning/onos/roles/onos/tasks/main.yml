@@ -3,5 +3,4 @@
   shell: systemctl status docker
 
 - name: Pull ONOS Docker image
-  docker_image:
-    name: onosproject/onos
+  shell: docker pull onosproject/onos

@@ -8,6 +8,8 @@
     groups: docker,sudo
     append: yes
 
-- name: Pull basic Docker image
-  docker_image:
+- name: Add ubuntu to docker group
+  user:
     name: ubuntu
+    groups: docker,sudo
+    append: yes

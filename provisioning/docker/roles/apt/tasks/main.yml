@@ -5,9 +5,7 @@
   tags: docker
 
 - name: Add key
-  apt_key:
-    key_server: hkp://p80.pool.sks-keyservers.net:80
-    id: 58118E89F3A912897C070ADBF76221572C52609D
+  shell: apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
   tags: docker
 
 - name: Add Docker APT Repo
@@ -28,4 +26,10 @@
   apt:
     name: docker-engine
     state: present
+  notify: Restart docker daemon
+  tags: docker
+
+- name: install docker-py
+  pip:
+    name: docker-py
   tags: docker
