@@ -13,16 +13,16 @@ Vagrant.configure(2) do |config|
   config.vm.define :onos do |template|
   end
 
-  config.ssh.username = 'vagrant'
-  config.ssh.password = 'vagrant'
-  config.ssh.insert_key = true
-
   # Use Virtual Box as provider
   config.vm.provider "virtualbox" do |vbx|
     vbx.name = "onos"
     vbx.memory = 4096
     vbx.cpus = 2
   end
+
+  config.vm.provision "shell", inline: "sudo apt-get update -qq"
+  config.vm.provision "shell", inline: "sudo apt-get install -qq python2.7"
+
   playbooks = [
     "basic",
     "docker",
@@ -35,9 +35,8 @@ Vagrant.configure(2) do |config|
   ]
 
   playbooks.each do |bookname|
-	config.vm.provision "ansible" do |ansible|
+    config.vm.provision "ansible" do |ansible|
       ansible.playbook = "provisioning/#{bookname}/playbook.yml"
-      ansible.inventory_path = "provisioning/hosts"
       ansible.sudo = "true"
       ansible.limit = "all"
     end
