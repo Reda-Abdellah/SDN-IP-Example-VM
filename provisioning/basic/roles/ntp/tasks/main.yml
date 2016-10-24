@@ -1,26 +1,26 @@
 ---
 - name: Be sure ntp daemon is installed
   apt: name=ntp state=installed
-  sudo: yes
+  become: yes
   tags: ntp
 
 - name: Change timezone Asia/Taipei
   copy:
     src=/usr/share/zoneinfo/Asia/Taipei
     dest=/etc/localtime
-  sudo: yes
+  become: yes
   tags: ntp
 
 - name: Write to hardware
   command: 'hwclock -w'
   run_once: true
   notify: Restart ntp daemon
-  sudo: yes
+  become: yes
   tags: ntp
 
 - name: Be sure ntp daemon is running and enabled
   service: name=ntp state=running enabled=yes
-  sudo: yes
+  become: yes
   tags: ntp
 
 - name: Check System Time

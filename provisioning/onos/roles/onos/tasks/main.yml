@@ -1,0 +1,6 @@
+---
+- name: Check docker status
+  shell: systemctl status docker
+
+- name: Pull ONOS Docker image
+  shell: docker pull onosproject/onos

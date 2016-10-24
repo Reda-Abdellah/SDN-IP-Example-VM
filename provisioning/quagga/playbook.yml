@@ -1,7 +1,7 @@
 ---
 - hosts: onos-master
   vars:
-    ansible_python_interpreter: "/usr/bin/python"
-  sudo: yes
+    ansible_python_interpreter: "/usr/bin/python2.7"
+  become: yes
   roles:
     - quagga
