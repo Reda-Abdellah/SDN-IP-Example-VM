@@ -1,4 +1,4 @@
-SDN-IP tutorial VM
+SDN-IP tutorial VM [![Build Status](https://travis-ci.org/sdnds-tw/SDN-IP-Example-VM.svg?branch=master)](https://travis-ci.org/sdnds-tw/SDN-IP-Example-VM)
 ----
 
 This repo includes:
