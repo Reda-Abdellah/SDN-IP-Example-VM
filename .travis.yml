@@ -15,11 +15,11 @@ install:
 
 script:
   # We'll add some commands to test the role here.
-  - ansible-playbook -i ci_test/local_inventory provisioning/basic/playbook.yml --syntax-check
-  - ansible-playbook -i ci_test/local_inventory provisioning/docker/playbook.yml --syntax-check
-  - ansible-playbook -i ci_test/local_inventory provisioning/onos/playbook.yml --syntax-check
-  - ansible-playbook -i ci_test/local_inventory provisioning/mininet/playbook.yml --syntax-check
-  - ansible-playbook -i ci_test/local_inventory provisioning/quagga/playbook.yml --syntax-check
-  - ansible-playbook -i ci_test/local_inventory provisioning/sdnip/playbook.yml --syntax-check
-  - ansible-playbook -i ci_test/local_inventory provisioning/gobgp/playbook.yml --syntax-check
-  - ansible-playbook -i ci_test/local_inventory provisioning/ryu/playbook.yml --syntax-check
+  - ansible-playbook -i ci_test/local_inventory provisioning/basic/playbook.yml
+  - ansible-playbook -i ci_test/local_inventory provisioning/docker/playbook.yml
+  - ansible-playbook -i ci_test/local_inventory provisioning/onos/playbook.yml
+  - ansible-playbook -i ci_test/local_inventory provisioning/mininet/playbook.yml
+  - ansible-playbook -i ci_test/local_inventory provisioning/quagga/playbook.yml
+  - ansible-playbook -i ci_test/local_inventory provisioning/sdnip/playbook.yml
+  - ansible-playbook -i ci_test/local_inventory provisioning/gobgp/playbook.yml
+  - ansible-playbook -i ci_test/local_inventory provisioning/ryu/playbook.yml
