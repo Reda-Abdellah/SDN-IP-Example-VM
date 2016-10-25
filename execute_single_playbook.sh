@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ ! -f provisioning/$1 ]; then
+if [ ! -d provisioning/$1 ]; then
   echo "playbook $1 not exist!"
   exit 1
 fi
