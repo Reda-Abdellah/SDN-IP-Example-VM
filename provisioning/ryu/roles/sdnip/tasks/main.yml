@@ -5,6 +5,8 @@
     dest: /root/Ryu-SDN-IP
     update: no
     version: "{{ RYU_SDN_IP_VERSION }}"
+  retries: 10
+  delay: 1
 - name: Install networkx
   pip:
     name: networkx

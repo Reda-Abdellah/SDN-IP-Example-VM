@@ -10,6 +10,8 @@
   environment:
     GOROOT: "{{ GO_HOME }}"
     GOPATH: "{{ HOME_PATH }}/gopath"
+  retries: 10
+  delay: 1
   tags: gobgp
 
 - name: Add CLI's tab completion for gobgp
@@ -20,6 +22,8 @@
     - "gobgp-completion.bash"
     - "gobgp-static-completion.bash"
     - "gobgp-dynamic-completion.bash"
+  retries: 10
+  delay: 1
   tags: gobgp
 
 - name: Add "~/." before gobgp-static-completion.bash and gobgp-dynamic-completion.bash in gobgp-completion.bash

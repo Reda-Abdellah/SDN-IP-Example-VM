@@ -5,6 +5,8 @@
     dest: /root/mininet
     update: no
     version: "{{ MININET_VERSION }}"
+  retries: 10
+  delay: 1
   tags: mininet
 
 - name: correct dpkg interrupted problem

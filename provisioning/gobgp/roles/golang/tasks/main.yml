@@ -16,6 +16,8 @@
   get_url:
     url: "{{ GOLANG_URL }}"
     dest: "{{ DOWNLOADS_PATH }}"
+  retries: 10
+  delay: 1
   tags: golang
 
 - name: Create directory for GOPATH
