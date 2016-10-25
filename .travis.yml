@@ -10,9 +10,6 @@ install:
   # Install Ansible.
   - pip install ansible
 
-  # Add ansible.cfg to pick up roles path.
-  - "printf '[defaults]\nhost_key_checking = False\n' > ansible.cfg"
-
 script:
   # We'll add some commands to test the role here.
   - ansible-playbook -i ci_test/local_inventory provisioning/basic/playbook.yml
